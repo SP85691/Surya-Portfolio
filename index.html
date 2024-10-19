@@ -21,17 +21,26 @@
 </head>
 <body class="font-poppins text-white bg-gray-900">
     <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-6 bg-gray-900">
-        <div class="text-2xl font-bold">Surya Pratap</div>
-        <nav>
-            <ul class="flex space-x-6 text-lg">
-                <li><a href="#hero" class="hover:text-yellow-400">Home</a></li>
-                <li><a href="#about" class="hover:text-yellow-400">About Me</a></li>
-                <li><a href="#skills" class="hover:text-yellow-400">Skills</a></li>
-                <li><a href="#projects" class="hover:text-yellow-400">Projects</a></li>
-                <li><a href="#contact" class="hover:text-yellow-400">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="flex space-x-4">
+        <div class="text-xl lg:text-2xl font-bold">Surya Pratap</div>
+    
+        <!-- Mobile Menu Button (Hamburger and Cross icon) -->
+        <div class="lg:hidden">
+            <button class="text-white focus:outline-none" id="mobile-menu-btn">
+                <i id="menu-icon" class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    
+        <!-- Navigation Menu for larger screens -->
+        <ul class="hidden lg:flex space-x-6 text-lg">
+            <li><a href="#hero" class="hover:text-yellow-400">Home</a></li>
+            <li><a href="#about" class="hover:text-yellow-400">About Me</a></li>
+            <li><a href="#skills" class="hover:text-yellow-400">Skills</a></li>
+            <li><a href="#projects" class="hover:text-yellow-400">Projects</a></li>
+            <li><a href="#contact" class="hover:text-yellow-400">Contact</a></li>
+        </ul>
+    
+        <!-- Social Icons for larger screens -->
+        <div class="hidden lg:flex space-x-4">
             <a href="https://instagram.com" class="text-xl hover:text-yellow-400" target="_blank">
                 <i class="fab fa-instagram"></i>
             </a>
@@ -44,15 +53,43 @@
             <a href="mailto:suryapratap8562@gmail.com" class="text-xl hover:text-yellow-400" target="_blank">
                 <i class="fas fa-envelope"></i>
             </a>
-            
+        </div>
+    
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-gray-900 text-white flex flex-col items-center justify-center space-y-6 hidden">
+            <ul class="text-lg space-y-6 text-center">
+                <li><a href="#hero" class="hover:text-yellow-400" onclick="toggleMenu()">Home</a></li>
+                <li><a href="#about" class="hover:text-yellow-400" onclick="toggleMenu()">About Me</a></li>
+                <li><a href="#skills" class="hover:text-yellow-400" onclick="toggleMenu()">Skills</a></li>
+                <li><a href="#projects" class="hover:text-yellow-400" onclick="toggleMenu()">Projects</a></li>
+                <li><a href="#contact" class="hover:text-yellow-400" onclick="toggleMenu()">Contact</a></li>
+            </ul>
+    
+            <!-- Social Icons in the center of the mobile menu -->
+            <div class="flex space-x-4">
+                <a href="https://instagram.com" class="text-xl hover:text-yellow-400" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/surya-pratap-871b95187/" class="text-xl hover:text-yellow-400" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/SP85691" class="text-xl hover:text-yellow-400" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:suryapratap8562@gmail.com" class="text-xl hover:text-yellow-400" target="_blank">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
         </div>
     </header>
 
-    <section id="hero" class="flex flex-col-reverse lg:flex-row items-center justify-center h-screen bg-gradient-to-tr from-gray-900 via-gray-900 to-black">
-        <div class="lg:w-1/2 flex justify-center lg:justify-end p-6 lg:pr-20"> <!-- Increased right padding for the image -->
+    <section id="hero" class="flex flex-col lg:flex-row items-center justify-center h-screen bg-gradient-to-tr from-gray-900 via-gray-900 to-black">
+        <!-- Profile Image -->
+        <div class="lg:w-1/2 flex justify-center lg:justify-end p-6 lg:pr-20">
             <img src="images/surya.jpg" alt="Your Photo" class="rounded-full shadow-lg w-64 lg:w-96 h-64 lg:h-96 object-cover transform transition-transform hover:scale-110 hover:shadow-xl">
         </div>
-        <div class="lg:w-1/2 text-center lg:text-left p-6 lg:pl-20"> <!-- Increased left padding for the text -->
+        <!-- Text Content -->
+        <div class="lg:w-1/2 text-center lg:text-left p-6 lg:pl-20">
             <h1 class="text-4xl lg:text-6xl font-bold mb-4">Hi, I'm <span class="text-yellow-400">Surya Pratap</span></h1>
             <p class="text-lg lg:text-2xl mb-6">Aspiring Senior Data Scientist with expertise in AI/ML, particularly in LLMs, NLP, and RAG, aiming to drive innovative solutions.</p>
             <a href="assets/SURYA_Resume.pdf" download class="inline-block bg-yellow-400 text-black px-8 py-3 rounded-full text-lg font-medium transition-transform transform hover:bg-indigo-700 hover:text-white">Download Resume</a>
@@ -62,13 +99,13 @@
     <section id="about" class="py-12 bg-gray-800">
         <div class="container mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold">About Me</h2>
+                <h2 class="text-4xl font-bold text-yellow-400">About Me</h2> <!-- Added color for visibility -->
             </div>
             
-            <div class="flex justify-center space-x-12">
+            <div class="flex flex-col lg:flex-row justify-center space-y-12 lg:space-y-0 lg:space-x-12">
                 <!-- Left Section - Experience -->
-                <div class="w-1/2 pr-8 pl-20">
-                    <h3 class="text-2xl font-bold mb-4">Experience</h3>
+                <div class="w-full lg:w-1/2 px-6 lg:px-0"> <!-- Adjusted padding for smaller screens -->
+                    <h3 class="text-2xl font-bold mb-4 text-yellow-400">Experience</h3> <!-- Added color for visibility -->
                     <ul class="relative border-l border-gray-300">
                         <li class="mb-10 ml-6">
                             <span class="absolute w-6 h-6 bg-gray-900 border-4 border-yellow-500 rounded-full -left-3"></span>
@@ -78,7 +115,7 @@
                             <h4 class="text-xl font-semibold">LetsAI Solutions Pvt. Ltd.</h4>
                             <p class="text-sm">AI Developer</p>
                             <p class="text-xs text-gray-400">Janakpuri East, New Delhi, India</p>
-                            <p class="mt-2 text-sm">Developed GenAI Solutions, with using Azure, AI/ML Techniques, API Integrations, Langchain, AutoGen, and many more.</p>
+                            <p class="mt-2 text-sm">Developed GenAI Solutions using Azure, AI/ML Techniques, API Integrations, Langchain, AutoGen, and more.</p>
                         </li>
                         <li class="mb-10 ml-6">
                             <span class="absolute w-6 h-6 bg-gray-900 border-4 border-yellow-500 rounded-full -left-3"></span>
@@ -88,20 +125,20 @@
                             <h4 class="text-xl font-semibold">Ashoka University (Hybrid)</h4>
                             <p class="text-sm">Machine Learning Intern</p>
                             <p class="text-xs text-gray-400">Sonipat, Haryana, India</p>
-                            <p class="mt-2 text-sm">Worked on multiple projects and built multiple machine learning solutions and implemented in the website which we are building for the Ashoka University.</p>
+                            <p class="mt-2 text-sm">Worked on multiple projects, building machine learning solutions and implementing them on the university's website.</p>
                         </li>
                         <!-- Repeat for more experiences -->
                     </ul>
                 </div>
-
+    
                 <!-- Center Divider Line -->
-                <div class="relative">
+                <div class="relative hidden lg:block">
                     <div class="absolute w-1 h-full bg-yellow-500 left-1/2 transform -translate-x-1/2"></div>
                 </div>
-
+    
                 <!-- Right Section - Education -->
-                <div class="w-1/2 pl-8">
-                    <h3 class="text-2xl font-bold mb-4">Education</h3>
+                <div class="w-full lg:w-1/2 px-6 lg:px-0">
+                    <h3 class="text-2xl font-bold mb-4 text-yellow-400">Education</h3> <!-- Added color for visibility -->
                     <ul class="relative border-l border-gray-300">
                         <li class="mb-10 ml-6">
                             <span class="absolute w-6 h-6 bg-gray-900 border-4 border-yellow-500 rounded-full -left-3"></span>
@@ -136,6 +173,7 @@
             </div>
         </div>
     </section>
+    
 
     <section id="skills" class="py-20 bg-gradient-to-tr from-gray-900 to-gray-900">
         <div class="container mx-auto px-6">
@@ -143,172 +181,290 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
                 <!-- Updated Icons -->
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://www.svgrepo.com/show/331553/python-package-index.svg" alt="Azure" class="w-16 h-15 mb-2" srcset="">
+                    <img src="https://www.svgrepo.com/show/331553/python-package-index.svg" alt="Python" class="w-16 h-16 mb-2">
                     <span>Python</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="images/azure.png" alt="Azure" class="w-16 h-15 mb-2" srcset="">
+                    <img src="images/azure.png" alt="Azure" class="w-16 h-16 mb-2">
                     <span>Azure</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="images/openai.webp" alt="OpenAI" class="w-16 h-16 mb-2" srcset=""> <!-- Placeholder for OpenAI -->
+                    <img src="images/openai.webp" alt="OpenAI" class="w-16 h-16 mb-2">
                     <span>OpenAI</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="images/langchain.jpg" alt="OpenAI" class="w-16 h-16 mb-2" srcset=""> <!-- Placeholder for Langchain -->
+                    <img src="images/langchain.jpg" alt="Langchain" class="w-16 h-16 mb-2">
                     <span>Langchain</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="images/fastapi.svg" alt="FastAPI" class="w-16 h-16 mb-2"> <!-- Placeholder for FastAPI -->
+                    <img src="images/fastapi.svg" alt="FastAPI" class="w-16 h-16 mb-2">
                     <span>FastAPI</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="images/flask.png" alt="Flask" class="w-16 h-16 mb-2"> <!-- Placeholder for Flask -->
+                    <img src="images/flask.png" alt="Flask" class="w-16 h-16 mb-2">
                     <span>Flask</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://microsoft.github.io/autogen/0.2/img/ag.svg" alt="Autogen" class="w-16 h-16 mb-2"> <!-- Placeholder for Autogen -->
+                    <img src="https://microsoft.github.io/autogen/0.2/img/ag.svg" alt="Autogen" class="w-16 h-16 mb-2">
                     <span>Autogen</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://icons.veryicon.com/png/o/education-technology/artificial-intelligence-2/nlp-natural-language-processing.png" alt="" class="w-16 h-16 mb-2"> <!-- Placeholder for Machine Learning -->
+                    <img src="https://icons.veryicon.com/png/o/education-technology/artificial-intelligence-2/nlp-natural-language-processing.png" alt="Machine Learning" class="w-16 h-16 mb-2">
                     <span>Machine Learning</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="images/huggingface.svg" alt="Hugging Face" class="w-16 h-16 mb-2"> <!-- Placeholder for Hugging Face -->
+                    <img src="images/huggingface.svg" alt="Hugging Face" class="w-16 h-16 mb-2">
                     <span>Hugging Face</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://w7.pngwing.com/pngs/441/460/png-transparent-postgresql-plain-wordmark-logo-icon-thumbnail.png" alt="Postgres" class="w-16 h-16 mb-2"> <!-- Placeholder for Postgres -->
+                    <img src="https://w7.pngwing.com/pngs/441/460/png-transparent-postgresql-plain-wordmark-logo-icon-thumbnail.png" alt="Postgres SQL" class="w-16 h-16 mb-2">
                     <span>Postgres SQL</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://www.svgrepo.com/show/331488/mongodb.svg" alt="MongoDB" class="w-16 h-16 mb-2"> <!-- Placeholder for MongoDB -->
+                    <img src="https://www.svgrepo.com/show/331488/mongodb.svg" alt="MongoDB" class="w-16 h-16 mb-2">
                     <span>MongoDB</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://www.svgrepo.com/show/331760/sql-database-generic.svg" alt="" srcset="" class="w-16 h-16 mb-2"> <!-- Placeholder for SQL -->
+                    <img src="https://www.svgrepo.com/show/331760/sql-database-generic.svg" alt="SQL" class="w-16 h-16 mb-2">
                     <span>SQL</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://icons.veryicon.com/png/o/education-technology/internet-blue-line-icon/api-interface.png" alt="" class="w-16 h-16 mb-2"> <!-- Placeholder for API -->
+                    <img src="https://icons.veryicon.com/png/o/education-technology/internet-blue-line-icon/api-interface.png" alt="API" class="w-16 h-16 mb-2">
                     <span>API</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://streamlit.io/images/brand/streamlit-mark-color.svg" alt="" class="w-16 h-16 mb-2"> <!-- Placeholder for Streamlit -->
+                    <img src="https://streamlit.io/images/brand/streamlit-mark-color.svg" alt="Streamlit" class="w-16 h-16 mb-2">
                     <span>Streamlit</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt=""  class="w-16 h-16 mb-2"> <!-- Placeholder for Git -->
+                    <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt="Git" class="w-16 h-16 mb-2">
                     <span>Git</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://cdn-icons-png.flaticon.com/512/226/226772.png" alt="" class="w-16 h-16 mb-2"> <!-- Placeholder for Linux -->
+                    <img src="https://cdn-icons-png.flaticon.com/512/226/226772.png" alt="Linux" class="w-16 h-16 mb-2">
                     <span>Linux</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://www.svgrepo.com/show/7917/cloud.svg" alt="" class="w-16 h-16 mb-2"> <!-- Placeholder for Cloud -->
+                    <img src="https://www.svgrepo.com/show/7917/cloud.svg" alt="Cloud" class="w-16 h-16 mb-2">
                     <span>Cloud</span>
                 </div>
                 <div class="flex flex-col items-center text-white">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png" alt="" class="w-16 h-16 mb-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png" alt="JavaScript" class="w-16 h-16 mb-2">
                     <span>JavaScript</span>
                 </div>
-
             </div>
         </div>
     </section>
+
     
-    <section id="projects" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-6">
+    <section id="projects" class="py-20 h-auto bg-gradient-to-tr from-gray-900 via-gray-900 to-black">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
             <h2 class="text-4xl font-bold text-center text-white mb-12">Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+    
+            <!-- Grid for projects (1 column on small screens, 2 on medium, 3 on large) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project Item -->
                 <div class="relative group">
-                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-4">
+                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-2">
+                        <img src="images/surya.jpg" alt="Project 1 Image" class="w-full h-40 object-cover rounded mb-4 transition-opacity duration-700 delay-200"/>
                         <h3 class="text-xl font-semibold text-white">Project Title 1</h3>
                         <p class="text-gray-300 mb-4">Short description of Project 1.</p>
-                        <img src="images/surya.jpg" alt="Project 1 Image" class="hidden group-hover:block w-full h-40 object-cover rounded mb-4 transition-opacity duration-500 delay-300" />
-                        <div class="hidden group-hover:block transition-opacity duration-500 delay-300">
+    
+                        <!-- Technologies Used Section -->
+                        <div class="flex flex-wrap mb-4">
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">HTML</span>
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">CSS</span>
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">JavaScript</span>
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">React</span>
+                        </div>
+    
+                        <!-- Hidden content that shows on hover -->
+                        <div class="hidden group-hover:block transition-opacity duration-700 delay-300">
                             <p class="text-gray-200 mb-4">Detailed description of Project 1. This section can contain more information about the project, technologies used, and its purpose.</p>
                             <a href="#" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-yellow-500">Explore</a>
                         </div>
                     </div>
                 </div>
     
-                <!-- Project Item -->
+                <!-- Project Item 2 -->
                 <div class="relative group">
-                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-4">
+                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-2">
+                        <img src="images/surya.jpg" alt="Project 2 Image" class="w-full h-40 object-cover rounded mb-4 transition-opacity duration-700 delay-200"/>
                         <h3 class="text-xl font-semibold text-white">Project Title 2</h3>
                         <p class="text-gray-300 mb-4">Short description of Project 2.</p>
-                        <img src="path/to/image2.jpg" alt="Project 2 Image" class="hidden group-hover:block w-full h-40 object-cover rounded mb-4 transition-opacity duration-500 delay-300" />
-                        <div class="hidden group-hover:block transition-opacity duration-500 delay-300">
+    
+                        <!-- Technologies Used Section -->
+                        <div class="flex flex-wrap mb-4">
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">Python</span>
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">Django</span>
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">PostgreSQL</span>
+                        </div>
+    
+                        <!-- Hidden content that shows on hover -->
+                        <div class="hidden group-hover:block transition-opacity duration-700 delay-300">
                             <p class="text-gray-200 mb-4">Detailed description of Project 2. This section can contain more information about the project, technologies used, and its purpose.</p>
                             <a href="#" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-yellow-500">Explore</a>
                         </div>
                     </div>
                 </div>
     
-                <!-- Project Item -->
+                <!-- Project Item 3 -->
                 <div class="relative group">
-                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-4">
+                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-2">
+                        <img src="images/surya.jpg" alt="Project 3 Image" class="w-full h-40 object-cover rounded mb-4 transition-opacity duration-700 delay-200"/>
                         <h3 class="text-xl font-semibold text-white">Project Title 3</h3>
                         <p class="text-gray-300 mb-4">Short description of Project 3.</p>
-                        <img src="path/to/image3.jpg" alt="Project 3 Image" class="hidden group-hover:block w-full h-40 object-cover rounded mb-4 transition-opacity duration-500 delay-300" />
-                        <div class="hidden group-hover:block transition-opacity duration-500 delay-300">
+    
+                        <!-- Technologies Used Section -->
+                        <div class="flex flex-wrap mb-4">
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">Node.js</span>
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">Express</span>
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">MongoDB</span>
+                        </div>
+    
+                        <!-- Hidden content that shows on hover -->
+                        <div class="hidden group-hover:block transition-opacity duration-700 delay-300">
                             <p class="text-gray-200 mb-4">Detailed description of Project 3. This section can contain more information about the project, technologies used, and its purpose.</p>
                             <a href="#" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-yellow-500">Explore</a>
                         </div>
                     </div>
                 </div>
     
-                <!-- Add more project items as needed -->
-            </div>
-    
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Item -->
+                <!-- Project Item 4 -->
                 <div class="relative group">
-                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-4">
-                        <h3 class="text-xl font-semibold text-white">Project Title 1</h3>
-                        <p class="text-gray-300 mb-4">Short description of Project 1.</p>
-                        <img src="images/surya.jpg" alt="Project 1 Image" class="hidden group-hover:block w-full h-40 object-cover rounded mb-4 transition-opacity duration-500 delay-300" />
-                        <div class="hidden group-hover:block transition-opacity duration-500 delay-300">
-                            <p class="text-gray-200 mb-4">Detailed description of Project 1. This section can contain more information about the project, technologies used, and its purpose.</p>
+                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-2">
+                        <img src="images/surya.jpg" alt="Project 4 Image" class="w-full h-40 object-cover rounded mb-4 transition-opacity duration-700 delay-200"/>
+                        <h3 class="text-xl font-semibold text-white">Project Title 4</h3>
+                        <p class="text-gray-300 mb-4">Short description of Project 4.</p>
+    
+                        <!-- Technologies Used Section -->
+                        <div class="flex flex-wrap mb-4">
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">Ruby on Rails</span>
+                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">PostgreSQL</span>
+                        </div>
+    
+                        <!-- Hidden content that shows on hover -->
+                        <div class="hidden group-hover:block transition-opacity duration-700 delay-300">
+                            <p class="text-gray-200 mb-4">Detailed description of Project 4. This section can contain more information about the project, technologies used, and its purpose.</p>
                             <a href="#" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-yellow-500">Explore</a>
                         </div>
                     </div>
                 </div>
-    
-                <!-- Project Item -->
-                <div class="relative group">
-                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-4">
-                        <h3 class="text-xl font-semibold text-white">Project Title 2</h3>
-                        <p class="text-gray-300 mb-4">Short description of Project 2.</p>
-                        <img src="path/to/image2.jpg" alt="Project 2 Image" class="hidden group-hover:block w-full h-40 object-cover rounded mb-4 transition-opacity duration-500 delay-300" />
-                        <div class="hidden group-hover:block transition-opacity duration-500 delay-300">
-                            <p class="text-gray-200 mb-4">Detailed description of Project 2. This section can contain more information about the project, technologies used, and its purpose.</p>
-                            <a href="#" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-yellow-500">Explore</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- Project Item -->
-                <div class="relative group">
-                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-4">
-                        <h3 class="text-xl font-semibold text-white">Project Title 3</h3>
-                        <p class="text-gray-300 mb-4">Short description of Project 3.</p>
-                        <img src="path/to/image3.jpg" alt="Project 3 Image" class="hidden group-hover:block w-full h-40 object-cover rounded mb-4 transition-opacity duration-500 delay-300" />
-                        <div class="hidden group-hover:block transition-opacity duration-500 delay-300">
-                            <p class="text-gray-200 mb-4">Detailed description of Project 3. This section can contain more information about the project, technologies used, and its purpose.</p>
-                            <a href="#" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-yellow-500">Explore</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- Add more project items as needed -->
             </div>
         </div>
-    </section>    
+    </section>
+
+<!-- Contact Us Section -->
+<!-- Contact Us Section -->
+<section id="contact" class="py-20 bg-gray-800">
+    <div class="container mx-auto px-4 md:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center text-yellow-400 mb-12">Contact Us</h2>
+
+        <div class="flex flex-col md:flex-row justify-between">
+            <!-- Map Section -->
+            <div class="md:w-1/2">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.3132331823395!2d-122.42067938467862!3d37.77492927975986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c7c78e88d%3A0x6d6ccf028bc09568!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1614234567123!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="440" 
+                    style="border:0; border-radius: 10px;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <!-- Contact Form Section -->
+            <div class="md:w-1/2 mt-8 md:mt-0">
+                <div class="max-w-lg mx-auto bg-gray-700 rounded-lg shadow-lg p-8">
+                    <form action="#" method="POST">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-300 text-sm font-semibold mb-2">Name</label>
+                            <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900" placeholder="Your Name">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-300 text-sm font-semibold mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900" placeholder="Your Email">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-300 text-sm font-semibold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900" placeholder="Your Message"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-yellow-400 text-gray-800 font-semibold py-2 rounded hover:bg-yellow-500 transition duration-300">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="bg-gray-900 text-gray-300 py-8">
+    <div class="container mx-auto px-4 md:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between">
+            <!-- Company Information -->
+            <div class="mb-8 md:mb-0 md:w-1/3">
+                <h4 class="text-lg font-bold mb-2">Company Name</h4>
+                <p class="mb-4">1234 Street Address, City, State 12345</p>
+                <p class="mb-2">Phone: (123) 456-7890</p>
+                <p>Email: <a href="mailto:info@example.com" class="text-yellow-400 hover:underline">info@example.com</a></p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="mb-8 md:mb-0 md:w-1/3">
+                <h4 class="text-lg font-bold mb-2">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="#about" class="hover:text-yellow-400 hover:underline">About Us</a></li>
+                    <li><a href="#services" class="hover:text-yellow-400 hover:underline">Services</a></li>
+                    <li><a href="#projects" class="hover:text-yellow-400 hover:underline">Projects</a></li>
+                    <li><a href="#contact" class="hover:text-yellow-400 hover:underline">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="md:w-1/3">
+                <h4 class="text-lg font-bold mb-2">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-yellow-400"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-yellow-400"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-yellow-400"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-4 text-center">
+            <p class="text-sm">&copy; 2024 Company Name. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Font Awesome CDN for Social Media Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
 
 </body>
+<script>
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+
+    // Toggle the menu visibility and change the icon
+    function toggleMenu() {
+        mobileMenu.classList.toggle('hidden');
+        // Switch between the hamburger and cross icon
+        if (menuIcon.classList.contains('fa-bars')) {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');  // X icon when menu opens
+        } else {
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');  // Hamburger icon when menu closes
+        }
+    }
+
+    mobileMenuBtn.addEventListener('click', toggleMenu);
+</script>
 </html>
