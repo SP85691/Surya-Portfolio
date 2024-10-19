@@ -104,7 +104,7 @@
             
             <div class="flex flex-col lg:flex-row justify-center space-y-12 lg:space-y-0 lg:space-x-12">
                 <!-- Left Section - Experience -->
-                <div class="w-full lg:w-1/2 px-6 lg:px-0"> <!-- Adjusted padding for smaller screens -->
+                <div class="w-full lg:w-1/2 px-6 lg:px-0 ml-10"> <!-- Adjusted padding for smaller screens -->
                     <h3 class="text-2xl font-bold mb-4 text-yellow-400">Experience</h3> <!-- Added color for visibility -->
                     <ul class="relative border-l border-gray-300">
                         <li class="mb-10 ml-6">
@@ -137,7 +137,7 @@
                 </div>
     
                 <!-- Right Section - Education -->
-                <div class="w-full lg:w-1/2 px-6 lg:px-0">
+                <div class="w-full lg:w-1/2 px-6 lg:px-0 ml-10">
                     <h3 class="text-2xl font-bold mb-4 text-yellow-400">Education</h3> <!-- Added color for visibility -->
                     <ul class="relative border-l border-gray-300">
                         <li class="mb-10 ml-6">
@@ -265,88 +265,164 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project Item -->
                 <div class="relative group">
-                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-2">
-                        <img src="images/surya.jpg" alt="Project 1 Image" class="w-full h-40 object-cover rounded mb-4 transition-opacity duration-700 delay-200"/>
-                        <h3 class="text-xl font-semibold text-white">Project Title 1</h3>
-                        <p class="text-gray-300 mb-4">Short description of Project 1.</p>
+                    <div class="bg-gray-800 rounded-lg p-6 shadow transition-transform duration-700 ease-in-out transform group-hover:translate-x-2 group-hover:shadow-lg">
+                        <img src="images/projects/1.1.png" alt="Project 1 Image" class="w-full h-80 object-cover rounded-lg mb-4 transition-opacity duration-700 delay-200"/>
+                        <h3 class="text-xl font-semibold text-white mb-1">Custom PDF Chat Agent</h3>
+                        <p class="text-gray-200 mb-3">PDF chat agent with Multi-LLMs Using Langchain.</p>
     
                         <!-- Technologies Used Section -->
                         <div class="flex flex-wrap mb-4">
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">HTML</span>
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">CSS</span>
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">JavaScript</span>
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">React</span>
+                            <span class="bg-green-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Python</span>
+                            <span class="bg-red-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Streamlit</span>
+                            <span class="bg-green-200 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Langchain</span>
+                            <span class="bg-red-500 text-white font-semibold py-1 px-3 rounded-md mr-2 my-2">FAISS</span>
+                            <span class="bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Hggingface</span>
+                            <span class="bg-pink-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Groq</span>
                         </div>
     
                         <!-- Hidden content that shows on hover -->
                         <div class="hidden group-hover:block transition-opacity duration-700 delay-300">
-                            <p class="text-gray-200 mb-4">Detailed description of Project 1. This section can contain more information about the project, technologies used, and its purpose.</p>
-                            <a href="#" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-yellow-500">Explore</a>
+                            <p class="text-gray-200 mb-4">This project enables users to upload PDFs from their local machine or the web, process them into chunks, and interactively chat with the content using advanced LLMs like Groq, Ollama, or OpenAI. It supports embeddings, conversational memory, and dynamic querying of PDF text for detailed answers.</p>
+                            <div class="flex flex-wrap mb-4">
+                                <a href="https://chat-with-pdf-groq.streamlit.app/" class="inline-block bg-red-400 text-gray-800 font-semibold py-2 px-4 mr-2 rounded-md hover:bg-green-200" target="_blank">Project Demo</a>
+                                <a href="https://github.com/SP85691/ChatPDF" class="inline-block bg-red-400 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-green-200" target="_blank">Github Repo</a>
+                            </div>
                         </div>
                     </div>
                 </div>
     
                 <!-- Project Item 2 -->
                 <div class="relative group">
-                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-2">
-                        <img src="images/surya.jpg" alt="Project 2 Image" class="w-full h-40 object-cover rounded mb-4 transition-opacity duration-700 delay-200"/>
-                        <h3 class="text-xl font-semibold text-white">Project Title 2</h3>
-                        <p class="text-gray-300 mb-4">Short description of Project 2.</p>
+                    <div class="bg-gray-800 rounded-lg p-6 shadow transition-transform duration-700 ease-in-out transform group-hover:translate-x-2 group-hover:shadow-lg">
+                        <img src="images/projects/2.png" alt="Project 2 Image" class="w-full h-80 object-cover rounded-lg mb-4 transition-opacity duration-700 delay-200"/>
+                        <h3 class="text-xl font-semibold text-white mb-1">Gideon Flux Tool</h3>
+                        <p class="text-gray-200 mb-3">Gideon - Your Personal AI Artist, Bringing Imagination to Life Through Stunning Visuals</p>
     
                         <!-- Technologies Used Section -->
                         <div class="flex flex-wrap mb-4">
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">Python</span>
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">Django</span>
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">PostgreSQL</span>
+                            <span class="bg-green-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Python</span>
+                            <span class="bg-red-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Streamlit</span>
+                            <span class="bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Hggingface</span>
                         </div>
     
                         <!-- Hidden content that shows on hover -->
                         <div class="hidden group-hover:block transition-opacity duration-700 delay-300">
-                            <p class="text-gray-200 mb-4">Detailed description of Project 2. This section can contain more information about the project, technologies used, and its purpose.</p>
-                            <a href="#" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-yellow-500">Explore</a>
+                            <p class="text-gray-200 mb-4">Gideon is an AI-powered virtual artist that creates images based on user descriptions. Users can input detailed prompts with objects, colors, and actions to get personalized artwork generated using a powerful AI model. The interactive chat displays the conversation and the AI-generated images, allowing users to experience a seamless blend of imagination and technology.</p>
+                            <div class="flex flex-wrap mb-4">
+                                <a href="https://flux-tool.streamlit.app/" class="inline-block bg-red-400 text-gray-800 font-semibold py-2 px-4 mr-2 rounded-md hover:bg-green-200" target="_blank">Project Demo</a>
+                                <a href="https://github.com/SP85691/Flux" class="inline-block bg-red-400 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-green-200" target="_blank">Github Repo</a>
+                            </div>
                         </div>
                     </div>
                 </div>
     
                 <!-- Project Item 3 -->
                 <div class="relative group">
-                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-2">
-                        <img src="images/surya.jpg" alt="Project 3 Image" class="w-full h-40 object-cover rounded mb-4 transition-opacity duration-700 delay-200"/>
-                        <h3 class="text-xl font-semibold text-white">Project Title 3</h3>
-                        <p class="text-gray-300 mb-4">Short description of Project 3.</p>
+                    <div class="bg-gray-800 rounded-lg p-6 shadow transition-transform duration-700 ease-in-out transform group-hover:translate-x-2 group-hover:shadow-lg">
+                        <img src="images/projects/3.png" alt="Project 3 Image" class="w-full h-80 object-cover rounded-lg mb-4 transition-opacity duration-700 delay-200"/>
+                        <h3 class="text-xl font-semibold text-white mb-1">Multi-Agent System</h3>
+                        <p class="text-gray-200 mb-3">Multi-Agent Chat Interface with Session Management.</p>
     
                         <!-- Technologies Used Section -->
                         <div class="flex flex-wrap mb-4">
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">Node.js</span>
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">Express</span>
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">MongoDB</span>
+                            <span class="bg-green-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Python</span>
+                            <span class="bg-green-600 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">FastAPI</span>
+                            <span class="bg-green-200 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Langchain</span>
+                            <span class="bg-red-500 text-white font-semibold py-1 px-3 rounded-md mr-2 my-2">FAISS</span>
+                            <span class="bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Hggingface</span>
+                            <span class="bg-pink-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Groq</span>
+                            <span class="bg-pink-400 text-gray-300 font-semibold py-1 px-3 rounded-md mr-2 my-2">JWT</span>
                         </div>
     
                         <!-- Hidden content that shows on hover -->
                         <div class="hidden group-hover:block transition-opacity duration-700 delay-300">
-                            <p class="text-gray-200 mb-4">Detailed description of Project 3. This section can contain more information about the project, technologies used, and its purpose.</p>
-                            <a href="#" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-yellow-500">Explore</a>
+                            <p class="text-gray-200 mb-4">This project implements a multi-agent chat interface, supporting user sessions and authentication. It includes frontend and backend development with proper session handling, along with integration of document parsing and user management. The chat interface is functional but still under development.</p>
+                            <div class="flex flex-wrap mb-4">
+                                <!-- <a href="#" class="inline-block bg-red-400 text-gray-800 font-semibold py-2 px-4 mr-2 rounded-md hover:bg-green-200" target="_blank">Project Demo</a> -->
+                                <a href="https://github.com/SP85691/Multi_Agent_Services" class="inline-block bg-red-400 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-green-200" target="_blank">Github Repo</a>
+                            </div>
                         </div>
                     </div>
                 </div>
     
                 <!-- Project Item 4 -->
                 <div class="relative group">
-                    <div class="bg-gray-700 rounded-lg p-6 transition-transform duration-700 ease-in-out transform group-hover:translate-x-2">
-                        <img src="images/surya.jpg" alt="Project 4 Image" class="w-full h-40 object-cover rounded mb-4 transition-opacity duration-700 delay-200"/>
-                        <h3 class="text-xl font-semibold text-white">Project Title 4</h3>
-                        <p class="text-gray-300 mb-4">Short description of Project 4.</p>
+                    <div class="bg-gray-800 rounded-lg p-6 shadow transition-transform duration-700 ease-in-out transform group-hover:translate-x-2 group-hover:shadow-lg">
+                        <img src="images/projects/4.png" alt="Project 4 Image" class="w-full h-70 object-cover rounded-lg mb-4 transition-opacity duration-700 delay-200"/>
+                        <h3 class="text-xl font-semibold text-white mb-1">FastAPI PDF Agent With Pinata Storage.</h3>
+                        <p class="text-gray-200 mb-3">FastAPI PDF Agent for Pinata Hash File Management..</p>
     
                         <!-- Technologies Used Section -->
                         <div class="flex flex-wrap mb-4">
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">Ruby on Rails</span>
-                            <span class="bg-yellow-400 text-gray-800 font-semibold py-1 px-3 rounded-full mr-2 my-2">PostgreSQL</span>
+                            <span class="bg-green-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Python</span>
+                            <span class="bg-green-600 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">FastAPI</span>
+                            <span class="bg-green-200 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Langchain</span>
+                            <span class="bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Hggingface</span>
+                            <span class="bg-pink-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Groq</span>
                         </div>
     
                         <!-- Hidden content that shows on hover -->
                         <div class="hidden group-hover:block transition-opacity duration-700 delay-300">
-                            <p class="text-gray-200 mb-4">Detailed description of Project 4. This section can contain more information about the project, technologies used, and its purpose.</p>
-                            <a href="#" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-yellow-500">Explore</a>
+                            <p class="text-gray-200 mb-4">This FastAPI application enables users to upload and manage PDF files using an AI agent. It integrates with Pinata for IPFS storage, allowing users to pin, read, delete, and list files while offering an interactive chat feature for querying document content.</p>
+                            <div class="flex flex-wrap mb-4">
+                                <a href="https://1drv.ms/v/s!AqnWlVJDYl6zhesAMYpU5D3rRT66jA" class="inline-block bg-red-400 text-gray-800 font-semibold py-2 px-4 mr-2 rounded-md hover:bg-green-200" target="_blank">Demo Video</a>
+                                <a href="https://github.com/SP85691/Hackindia-Spark-3---CyberPunks" class="inline-block bg-red-400 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-green-200" target="_blank">Github Repo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Item 5 -->
+                <div class="relative group">
+                    <div class="bg-gray-800 rounded-lg p-6 shadow transition-transform duration-700 ease-in-out transform group-hover:translate-x-2 group-hover:shadow-lg">
+                        <img src="images/projects/5.png" alt="Project 5 Image" class="w-full h-70 object-cover rounded-lg mb-4 transition-opacity duration-700 delay-200"/>
+                        <h3 class="text-xl font-semibold text-white mb-1">Face Attendance System</h3>
+                        <p class="text-gray-200 mb-3">Automated attendance tracking using facial recognition.</p>
+    
+                        <!-- Technologies Used Section -->
+                        <div class="flex flex-wrap mb-4">
+                            <span class="bg-green-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Python</span>
+                            <span class="bg-red-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Deep Learning</span>
+                            <span class="bg-blue-500 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">PyTorch</span>
+                            <span class="bg-gray-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">OpenCV</span>
+                            <span class="bg-pink-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Firebase</span>
+                            <span class="bg-blue-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Machine Learning</span>
+                        </div>
+    
+                        <!-- Hidden content that shows on hover -->
+                        <div class="hidden group-hover:block transition-opacity duration-700 delay-300">
+                            <p class="text-gray-200 mb-4">This Face Attendance System utilizes facial recognition technology to automate attendance tracking in educational settings. By integrating with Firebase for student data management, the system identifies students in real-time, displaying their information while ensuring accurate attendance records.</p>
+                            <div class="flex flex-wrap mb-4">
+                                <a href="https://github.com/SP85691/Face_Classification_Model/" class="inline-block bg-red-400 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-green-200" target="_blank">Github Repo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Item 6 -->
+                <div class="relative group">
+                    <div class="bg-gray-800 rounded-lg p-6 shadow transition-transform duration-700 ease-in-out transform group-hover:translate-x-2 group-hover:shadow-lg">
+                        <img src="images/projects/6.png" alt="Project 6 Image" class="w-full h-70 object-cover rounded-lg mb-4 transition-opacity duration-700 delay-200"/>
+                        <h3 class="text-xl font-semibold text-white mb-1">Emotion Detection in Real-Time</h3>
+                        <p class="text-gray-200 mb-3">Real-time emotion detection using webcam and CNN.</p>
+    
+                        <!-- Technologies Used Section -->
+                        <div class="flex flex-wrap mb-4">
+                            <span class="bg-green-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Python</span>
+                            <span class="bg-gray-500 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Flask</span>
+                            <span class="bg-blue-500 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">PyTorch</span>
+                            <span class="bg-gray-400 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">OpenCV</span>
+                            <span class="bg-pink-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">NumPy</span>
+                            <span class="bg-blue-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">Machine Learning</span>
+                            <span class="bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-md mr-2 my-2">HTML/CSS</span>
+                        </div>
+    
+                        <!-- Hidden content that shows on hover -->
+                        <div class="hidden group-hover:block transition-opacity duration-700 delay-300">
+                            <p class="text-gray-200 mb-4">This Flask-based web application utilizes a simple convolutional neural network (CNN) to detect human emotions from live webcam feed. It processes video frames, identifies faces, and classifies emotions in real-time, providing an interactive user experience..</p>
+                            <div class="flex flex-wrap mb-4">
+                                <a href="https://github.com/SP85691/Face_Classification_Model/" class="inline-block bg-red-400 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-green-200" target="_blank">Github Repo</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -363,20 +439,13 @@
         <div class="flex flex-col md:flex-row justify-between">
             <!-- Map Section -->
             <div class="md:w-1/2">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.3132331823395!2d-122.42067938467862!3d37.77492927975986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c7c78e88d%3A0x6d6ccf028bc09568!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1614234567123!5m2!1sen!2sus" 
-                    width="100%" 
-                    height="440" 
-                    style="border:0; border-radius: 10px;" 
-                    allowfullscreen="" 
-                    loading="lazy">
-                </iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d138901.75996134212!2d77.12658436273053!3d28.5274781634109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x52c2b7494e204dce!2sNew%20Delhi%2C%20Delhi!5e1!3m2!1sen!2sin!4v1729366789788!5m2!1sen!2sin" width="100%" height="440" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
             <!-- Contact Form Section -->
             <div class="md:w-1/2 mt-8 md:mt-0">
-                <div class="max-w-lg mx-auto bg-gray-700 rounded-lg shadow-lg p-8">
-                    <form action="#" method="POST">
+                <div class="max-w-lg mx-auto bg-gray-700 rounded-lg shadow-lg p-8" id="contact-form">
+                    <form id="send-form">
                         <div class="mb-4">
                             <label for="name" class="block text-gray-300 text-sm font-semibold mb-2">Name</label>
                             <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900" placeholder="Your Name">
@@ -395,6 +464,11 @@
                         <button type="submit" class="w-full bg-yellow-400 text-gray-800 font-semibold py-2 rounded hover:bg-yellow-500 transition duration-300">Send Message</button>
                     </form>
                 </div>
+                <!-- Success Message Card -->
+                <div class="max-w-lg mx-auto bg-gray-700 rounded-lg shadow-lg p-8 hidden" id="success-message">
+                    <h3 class="text-lg font-bold text-yellow-400 mb-2">Thank You!</h3>
+                    <p>We will connect with you soon!</p>
+                </div>
             </div>
         </div>
     </div>
@@ -406,10 +480,10 @@
         <div class="flex flex-col md:flex-row justify-between">
             <!-- Company Information -->
             <div class="mb-8 md:mb-0 md:w-1/3">
-                <h4 class="text-lg font-bold mb-2">Company Name</h4>
-                <p class="mb-4">1234 Street Address, City, State 12345</p>
-                <p class="mb-2">Phone: (123) 456-7890</p>
-                <p>Email: <a href="mailto:info@example.com" class="text-yellow-400 hover:underline">info@example.com</a></p>
+                <h4 class="text-lg font-bold mb-2">Surya Pratap</h4>
+                <p class="mb-4">Badarpur, New Delhi, Delhi, India</p>
+                <p class="mb-2">Phone: (+91) 85120-68247</p>
+                <p>Email: <a href="mailto:suryapratap8562@gmail.com" class="text-yellow-400 hover:underline">suryapratap8562@gmail.com</a></p>
             </div>
 
             <!-- Quick Links -->
@@ -436,16 +510,14 @@
         </div>
 
         <div class="border-t border-gray-700 mt-8 pt-4 text-center">
-            <p class="text-sm">&copy; 2024 Company Name. All Rights Reserved.</p>
+            <p class="text-sm">&copy; 2024 Surya Pratap. All Rights Reserved.</p>
         </div>
     </div>
 </footer>
 
 <!-- Font Awesome CDN for Social Media Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
-
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </body>
 <script>
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -466,5 +538,24 @@
     }
 
     mobileMenuBtn.addEventListener('click', toggleMenu);
+
+    <!-- EmailJS Script -->
+    (function(){
+        emailjs.init("YOUR_USER_ID"); // Replace with your User ID
+    })();
+
+    document.getElementById('send-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Send email using EmailJS
+        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+            .then(function() {
+                // Hide contact form and show success message
+                document.getElementById('contact-form').classList.add('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+            }, function(error) {
+                console.error('Failed to send email:', error);
+            });
+    });
 </script>
 </html>
