@@ -1,0 +1,44 @@
+---
+title: SkinCare AI
+slug: skincare-ai
+summary: Computer vision pipeline for dermatological assessment.
+role: ML Engineer
+stack: [PyTorch, FastAPI, React, AWS]
+metrics:
+  - label: Model accuracy
+    value: "94%"
+  - label: Inference time
+    value: "<200ms"
+heroImage: /assets/images/case-studies/skincare-ai-hero.svg
+diagramPaths:
+  - /diagrams/skincare-ai/architecture.svg
+publishedAt: 2025-11-20
+---
+
+## Overview
+
+SkinCare AI delivers real-time dermatological assessment through a computer vision pipeline trained on curated clinical imagery. The product helps consumers understand skin conditions while routing high-risk cases to licensed dermatologists.
+
+The system spans mobile capture, cloud inference, and a clinician review portal — all designed with privacy-first data handling.
+
+## Challenges
+
+Medical imaging datasets are inherently imbalanced and subject to strict consent requirements. We needed robust augmentation strategies and federated evaluation protocols to avoid overfitting to specific skin tones or lighting conditions.
+
+Mobile deployment constraints — variable network quality and diverse camera hardware — demanded a lightweight inference stack with graceful degradation.
+
+## Architecture
+
+Images flow from the React Native client through a FastAPI gateway to a PyTorch inference service on AWS SageMaker. Results are stored in encrypted S3 buckets with metadata indexed in DynamoDB for clinician retrieval.
+
+A separate training pipeline on AWS Batch handles periodic model retraining with human-verified labels from the review portal.
+
+## Implementation
+
+We built a multi-stage CNN ensemble with attention maps for explainability, allowing users to see which image regions influenced the classification. Transfer learning from a dermatology-specific foundation model accelerated convergence.
+
+Edge preprocessing normalizes lighting and crops regions of interest before upload, reducing payload size by 60% and improving inference consistency across devices.
+
+## Results
+
+The production model reached 94% top-1 accuracy on the held-out clinical validation set, with sub-200ms p95 inference latency. Dermatologist review turnaround dropped from 48 hours to under 4 hours for flagged cases, and user satisfaction scores exceeded 4.6/5 in beta testing.

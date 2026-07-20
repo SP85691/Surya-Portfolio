@@ -1,0 +1,44 @@
+---
+title: iSpeak AI
+slug: ispeak-ai
+summary: Real-time speech coaching with prosody analysis.
+role: Full-Stack Engineer
+stack: [Next.js, WebRTC, Whisper, Node.js]
+metrics:
+  - label: Active users
+    value: "10K+"
+  - label: Session retention
+    value: "72%"
+heroImage: /assets/images/case-studies/ispeak-ai-hero.svg
+diagramPaths:
+  - /diagrams/ispeak-ai/architecture.svg
+publishedAt: 2025-09-01
+---
+
+## Overview
+
+iSpeak AI is a real-time speech coaching platform that analyzes prosody, pacing, and clarity during live practice sessions. Built for professionals preparing for presentations, interviews, and public speaking engagements.
+
+The product combines browser-based audio capture with streaming transcription and instant feedback overlays — no native app install required.
+
+## Challenges
+
+Real-time audio processing in the browser introduces latency budgets measured in milliseconds. WebRTC stream quality varies wildly across devices, requiring adaptive buffering and noise gate tuning.
+
+Generating actionable coaching feedback — not just transcripts — meant designing a prosody scoring model that felt encouraging rather than punitive.
+
+## Architecture
+
+The Next.js frontend establishes a WebRTC connection to a Node.js signaling server. Audio chunks stream to a Whisper-based transcription service, while a parallel prosody analyzer computes pitch variance, pause patterns, and speaking rate.
+
+Feedback events publish over WebSockets to the client, rendered as non-blocking toast hints and a live metrics panel.
+
+## Implementation
+
+We implemented a sliding-window analysis pipeline that balances responsiveness with accuracy — 2-second windows with 500ms overlap provide smooth metric updates without overwhelming the user.
+
+Session recordings are opt-in and encrypted at rest. A gamified progress system tracks improvement across dimensions like clarity, energy, and filler-word frequency, driving 72% week-over-week retention in beta.
+
+## Results
+
+iSpeak AI surpassed 10,000 active users within six months of launch. Average session length grew to 14 minutes as users returned for structured practice routines. Enterprise pilots with two Fortune 500 L&D teams are underway for Q3 expansion.

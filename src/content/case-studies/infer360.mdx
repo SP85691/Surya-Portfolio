@@ -1,0 +1,44 @@
+---
+title: Infer360
+slug: infer360
+summary: Multi-agent clinical inference platform.
+role: Lead Engineer
+stack: [Next.js, Python, OpenAI, PostgreSQL]
+metrics:
+  - label: Latency reduction
+    value: "85%"
+  - label: Agents orchestrated
+    value: "12"
+heroImage: /assets/images/case-studies/infer360-hero.svg
+diagramPaths:
+  - /diagrams/infer360/architecture.svg
+publishedAt: 2026-01-15
+---
+
+## Overview
+
+Infer360 is a multi-agent clinical inference platform that coordinates specialized AI agents to support diagnostic workflows. Each agent handles a narrow clinical task — symptom extraction, differential ranking, guideline lookup — while a central orchestrator maintains audit trails and human-in-the-loop checkpoints.
+
+The platform was built for a healthcare startup needing sub-second inference at scale without sacrificing explainability or regulatory compliance.
+
+## Challenges
+
+Clinical AI systems face unique constraints: PHI boundaries, latency SLAs, and the need for traceable reasoning chains. We had to balance agent autonomy with deterministic guardrails, ensuring every recommendation could be traced back to source evidence.
+
+Integrating legacy EHR data formats and normalizing unstructured clinical notes added significant preprocessing complexity before agents could operate reliably.
+
+## Architecture
+
+The system follows a hexagonal architecture with a Python orchestration core, Next.js operator dashboard, and PostgreSQL for session state and audit logs. Agents communicate via structured message envelopes validated against JSON Schema.
+
+A Redis-backed queue handles burst traffic while OpenAI function calling powers individual agent reasoning loops. The frontend consumes Server-Sent Events for real-time inference progress.
+
+## Implementation
+
+We implemented a plugin registry for agents, allowing new clinical modules to ship independently. Each agent exposes a standard `propose` / `confirm` contract aligned with our "AI proposes, humans confirm" philosophy.
+
+Latency was reduced through parallel agent fan-out, prompt caching, and selective model routing — lightweight tasks hit smaller models while complex differentials escalate to frontier models only when confidence scores drop below threshold.
+
+## Results
+
+Production deployment achieved an 85% latency reduction compared to the sequential baseline. Clinicians reported higher trust due to transparent reasoning chains and one-click override paths. The platform now orchestrates 12 specialized agents across three hospital pilot sites.

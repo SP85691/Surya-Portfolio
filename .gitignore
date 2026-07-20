@@ -1,0 +1,73 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Next.js / build
+.next/
+.next-dev/
+out/
+build/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# Env & secrets (keep .env.example)
+.env
+.env.*
+!.env.example
+!.env*.example
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# Debug / logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+*.log
+
+# Test / coverage
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+.vercel/
+.netlify/
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# Editors / IDEs
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.swp
+*.swo
+*~
+
+# Cursor / local agent state (do not ship)
+.cursor/
+.claude/
+.agents/
+agent-transcripts/
+
+# Misc
+*.local
+.cache/
+tmp/
+temp/
