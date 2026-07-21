@@ -8,53 +8,74 @@ type Props = {
   className?: string;
 };
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+const BEAM = "var(--lamp-beam)";
+
 export function LampContainer({ children, className }: Props) {
   return (
     <div
       className={cn(
-        "relative flex min-h-[60vh] w-full flex-col items-center justify-center overflow-hidden bg-[var(--bg-page)] rounded-md z-0",
+        "relative isolate z-0 flex min-h-[68svh] w-full flex-col items-center justify-center overflow-hidden bg-[var(--bg-page)] px-5 py-28 md:py-36",
         className,
       )}
     >
-      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate">
+      {/* Decorative lamp — anchored to the top, fully contained, resolution-safe.
+          It lives behind the content in normal flow, so it can never overlap the
+          section above it at any viewport size. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[24rem] overflow-hidden"
+      >
+        {/* Conic beams fanning down from the center-top */}
         <motion.div
-          initial={{ opacity: 0.5, width: "15rem" }}
+          initial={{ opacity: 0.35, width: "16rem" }}
+          whileInView={{ opacity: 1, width: "34rem" }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.9, ease: EASE }}
+          style={{
+            backgroundImage: `conic-gradient(from 70deg at center top, ${BEAM} 0deg, transparent 62deg, transparent 320deg, ${BEAM} 360deg)`,
+          }}
+          className="absolute right-1/2 top-0 h-64 w-[34rem] max-w-[92vw]"
+        />
+        <motion.div
+          initial={{ opacity: 0.35, width: "16rem" }}
+          whileInView={{ opacity: 1, width: "34rem" }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.9, ease: EASE }}
+          style={{
+            backgroundImage: `conic-gradient(from 290deg at center top, ${BEAM} 0deg, transparent 40deg, transparent 298deg, ${BEAM} 360deg)`,
+          }}
+          className="absolute left-1/2 top-0 h-64 w-[34rem] max-w-[92vw]"
+        />
+        {/* Haze that dissolves the beams into the page background */}
+        <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-transparent via-[var(--bg-page)]/30 to-[var(--bg-page)]" />
+        {/* Central glow that bridges the bright line down toward the copy.
+            Brighter in light theme so it lifts the page behind dark text;
+            a softer halo in dark theme. */}
+        <motion.div
+          initial={{ opacity: 0, width: "10rem" }}
+          whileInView={{ opacity: 1, width: "24rem" }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 1, ease: EASE }}
+          style={{ backgroundColor: "var(--lamp-glow)" }}
+          className="absolute left-1/2 top-12 h-72 w-[24rem] max-w-[86vw] -translate-x-1/2 rounded-[100%] opacity-70 blur-3xl dark:opacity-[0.16]"
+        />
+        {/* The bright lamp line */}
+        <motion.div
+          initial={{ opacity: 0, width: "10rem" }}
           whileInView={{ opacity: 1, width: "30rem" }}
-          transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.9, ease: EASE }}
           style={{
             backgroundImage:
-              "conic-gradient(var(--conic-position, from 70deg at center top), var(--border) 0deg, transparent 60deg, transparent 320deg, var(--border) 360deg)",
+              "linear-gradient(to right, transparent, var(--lamp-line), transparent)",
           }}
-          className="absolute inset-auto right-1/2 h-56 overflow-visible w-[30rem]"
+          className="absolute left-1/2 top-16 h-0.5 w-[30rem] max-w-[86vw] -translate-x-1/2 rounded-full"
         />
-        <motion.div
-          initial={{ opacity: 0.5, width: "15rem" }}
-          whileInView={{ opacity: 1, width: "30rem" }}
-          transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-          style={{
-            backgroundImage:
-              "conic-gradient(var(--conic-position, from 290deg at center top), var(--border) 0deg, transparent 60deg, transparent 320deg, var(--border) 360deg)",
-          }}
-          className="absolute inset-auto left-1/2 h-56 w-[30rem] overflow-visible"
-        />
-        <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-[var(--bg-page)] blur-2xl" />
-        <div className="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md" />
-        <div className="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-[var(--bg-page)] opacity-50 blur-3xl" />
-        <motion.div
-          initial={{ width: "8rem" }}
-          whileInView={{ width: "16rem" }}
-          transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-          className="absolute inset-auto z-30 h-36 w-64 -translate-y-[6rem] rounded-full bg-[var(--text-primary)] opacity-10 blur-2xl"
-        />
-        <motion.div
-          initial={{ width: "15rem" }}
-          whileInView={{ width: "9rem" }}
-          transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-          className="absolute inset-auto z-50 h-0.5 w-[9rem] -translate-y-[7rem] bg-[var(--text-primary)]"
-        />
-        <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-[var(--bg-page)]" />
       </div>
-      <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">
+
+      {/* Content — normal centered flow, nudged up under the lamp line */}
+      <div className="relative z-50 -mt-4 flex w-full max-w-3xl flex-col items-center md:-mt-8">
         {children}
       </div>
     </div>

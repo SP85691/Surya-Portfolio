@@ -25,6 +25,47 @@ function openCommandMenu() {
   window.dispatchEvent(new Event("open-command-menu"));
 }
 
+function BrandLogo({
+  onClick,
+  compact = false,
+}: {
+  onClick?: () => void;
+  compact?: boolean;
+}) {
+  const initial = SITE_META.name.charAt(0).toUpperCase();
+
+  return (
+    <Link
+      href="/"
+      onClick={onClick}
+      aria-label={`${SITE_META.name} — home`}
+      className="group relative z-20 flex items-center gap-2.5 rounded-xl py-1 pr-2"
+    >
+      <span
+        className={`relative flex ${
+          compact ? "size-7" : "size-8"
+        } items-center justify-center overflow-hidden rounded-lg bg-[var(--text-primary)] font-brand font-bold leading-none text-[var(--bg-page)] shadow-[0_1px_0_0_color-mix(in_srgb,var(--text-primary)_20%,transparent)] transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-105`}
+      >
+        <span className={compact ? "text-sm" : "text-base"}>{initial}</span>
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -left-full top-0 h-full w-full -skew-x-12 bg-[color-mix(in_srgb,var(--bg-page)_45%,transparent)] transition-transform duration-500 ease-out group-hover:translate-x-[220%]"
+        />
+      </span>
+      <span
+        className={`font-brand font-semibold tracking-tight text-[var(--text-primary)] ${
+          compact ? "text-base" : "text-lg"
+        }`}
+      >
+        {SITE_META.name}
+        <span className="text-[var(--text-muted)] transition-colors duration-300 group-hover:text-[var(--accent)]">
+          .
+        </span>
+      </span>
+    </Link>
+  );
+}
+
 export function Header() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -38,14 +79,11 @@ export function Header() {
 
   return (
     <header className="relative z-50 w-full">
-      <Navbar className="fixed! inset-x-0 top-0! z-50">
+      <Navbar className="fixed! inset-x-0 top-3! z-50 md:top-4!">
         <NavBody className="max-w-[min(90rem,92vw)]! min-w-0!">
-          <Link
-            href="/"
-            className="relative z-20 mr-4 flex items-center px-2 py-1 font-display text-lg font-bold tracking-tight text-[var(--text-primary)]"
-          >
-            {SITE_META.name}
-          </Link>
+          <div className="mr-4">
+            <BrandLogo />
+          </div>
 
           <NavItems items={navItems} />
 
@@ -82,12 +120,7 @@ export function Header() {
 
         <MobileNav className="bg-[var(--bg-surface)]/90 backdrop-blur-md">
           <MobileNavHeader>
-            <Link
-              href="/"
-              className="font-display text-lg font-bold text-[var(--text-primary)]"
-            >
-              {SITE_META.name}
-            </Link>
+            <BrandLogo compact />
             <div className="flex items-center gap-2">
               {mounted && (
                 <Button

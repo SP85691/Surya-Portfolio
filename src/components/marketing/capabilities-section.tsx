@@ -5,7 +5,15 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
+import {
+  ArrowRightIcon,
+  ArrowUpRightIcon,
+  NetworkIcon,
+  StethoscopeIcon,
+  BoxesIcon,
+  GaugeIcon,
+  type LucideIcon,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -25,10 +33,13 @@ type Capability = {
   index: string;
   title: string;
   summary: string;
+  signal: string;
   detail: string;
   deliverables: string[];
   proof: ProofMetric[];
   caseStudy: { label: string; href: string };
+  icon: LucideIcon;
+  accent: string;
 };
 
 /**
@@ -39,6 +50,7 @@ const CAPABILITIES: Capability[] = [
     index: "01",
     title: "Agent platforms",
     summary: "Orchestration operators can trust.",
+    signal: "Every action — proposed, then confirmed.",
     detail:
       "Multi-agent systems with propose/confirm contracts, audit envelopes, and human checkpoints as first-class surfaces. Parallel fan-out, prompt caching, and selective model routing — measured, not guessed.",
     deliverables: [
@@ -52,11 +64,14 @@ const CAPABILITIES: Capability[] = [
       { value: 3, suffix: "", label: "Hospital pilots" },
     ],
     caseStudy: { label: "Infer360", href: "/work/infer360" },
+    icon: NetworkIcon,
+    accent: "#6E8CA0",
   },
   {
     index: "02",
     title: "Clinical & regulated AI",
     summary: "High-stakes inference with calm UX.",
+    signal: "A wrong answer is a patient risk.",
     detail:
       "Inference that respects PHI boundaries, clinical SLAs, and operator workflows. Traceable reasoning chains, deterministic fallbacks, and one-click overrides — because a wrong answer is a patient risk.",
     deliverables: [
@@ -70,11 +85,14 @@ const CAPABILITIES: Capability[] = [
       { value: 1, suffix: "", label: "Click override path" },
     ],
     caseStudy: { label: "Infer360", href: "/work/infer360" },
+    icon: StethoscopeIcon,
+    accent: "#B08A8A",
   },
   {
     index: "03",
     title: "Production architecture",
     summary: "Contracts first. Adapters last.",
+    signal: "Architecture that survives contact.",
     detail:
       "Hexagonal, contracts-first systems that separate agents from adapters. JSON Schema message envelopes, Redis-backed burst queues, and observability baked into the first vertical slice — so the architecture survives contact.",
     deliverables: [
@@ -88,11 +106,14 @@ const CAPABILITIES: Capability[] = [
       { value: 10, suffix: "K+", label: "Active users" },
     ],
     caseStudy: { label: "Selected work", href: "/work" },
+    icon: BoxesIcon,
+    accent: "#7C9A7E",
   },
   {
     index: "04",
     title: "Performance & reliability",
     summary: "Quiet on-call. Measurable speed.",
+    signal: "Scary releases become non-events.",
     detail:
       "Taken inference from slow-and-scary to an 85% latency drop with calmer rollouts. Lightweight tasks hit smaller models; complex differentials escalate only when confidence drops. Audit envelopes turn scary releases into non-events.",
     deliverables: [
@@ -106,6 +127,8 @@ const CAPABILITIES: Capability[] = [
       { value: 12, suffix: "", label: "Specialized agents" },
     ],
     caseStudy: { label: "Infer360 results", href: "/work/infer360" },
+    icon: GaugeIcon,
+    accent: "#A88B6A",
   },
 ];
 
@@ -121,7 +144,7 @@ export function CapabilitiesSection() {
   const activeRef = useRef(0);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const [active, setActive] = useState(0);
-  const current = CAPABILITIES[active] ?? CAPABILITIES[0];
+  const current = CAPABILITIES[active] ?? CAPABILITIES[0]!;
 
   const animateMetrics = useCallback((capability: Capability) => {
     const root = metricsRef.current;
@@ -148,12 +171,76 @@ export function CapabilitiesSection() {
     });
   }, []);
 
+  // Rich content reveal for the active panel (masked title, accent line,
+  // icon pop, cascading copy, ghost drift) — transform/opacity only.
+  const animatePanel = useCallback(() => {
+    const root = panelRef.current;
+    if (!root) return;
+
+    const titleInner = root.querySelector<HTMLElement>(
+      "[data-cap-title-inner]",
+    );
+    const line = root.querySelector<HTMLElement>("[data-cap-line]");
+    const icon = root.querySelector<HTMLElement>("[data-cap-icon]");
+    const ghost = root.querySelector<HTMLElement>("[data-cap-ghost]");
+    const fades = gsap.utils.toArray<HTMLElement>("[data-cap-fade]", root);
+    const badges = gsap.utils.toArray<HTMLElement>("[data-cap-badge]", root);
+    const targets = [titleInner, line, icon, ghost, ...fades, ...badges];
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    gsap.killTweensOf(targets);
+    if (reduce) {
+      gsap.set(targets, { clearProps: "all" });
+      return;
+    }
+
+    const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+    tl.fromTo(
+      titleInner,
+      { yPercent: 110 },
+      { yPercent: 0, duration: 0.55, ease: "power4.out" },
+      0,
+    )
+      .fromTo(
+        line,
+        { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.5 },
+        0.05,
+      )
+      .fromTo(
+        icon,
+        { autoAlpha: 0, scale: 0.7, rotate: -8 },
+        { autoAlpha: 1, scale: 1, rotate: 0, duration: 0.5, ease: "back.out(1.6)" },
+        0.03,
+      )
+      .fromTo(
+        ghost,
+        { autoAlpha: 0, scale: 1.15, yPercent: 8 },
+        { autoAlpha: 0.07, scale: 1, yPercent: 0, duration: 0.75 },
+        0,
+      )
+      .fromTo(
+        fades,
+        { autoAlpha: 0, y: 14 },
+        { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.06 },
+        0.06,
+      )
+      .fromTo(
+        badges,
+        { autoAlpha: 0, y: 16 },
+        { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.05 },
+        0.1,
+      );
+  }, []);
+
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
-      animateMetrics(CAPABILITIES[active] ?? CAPABILITIES[0]);
+      const cap = CAPABILITIES[active] ?? CAPABILITIES[0]!;
+      animatePanel();
+      animateMetrics(cap);
     });
     return () => cancelAnimationFrame(frame);
-  }, [active, animateMetrics]);
+  }, [active, animateMetrics, animatePanel]);
 
   const runShutterSwap = useCallback((nextIndex: number) => {
     if (nextIndex === activeRef.current) return;
@@ -262,6 +349,8 @@ export function CapabilitiesSection() {
     { scope: sectionRef },
   );
 
+  const Icon = current.icon;
+
   return (
     <section
       ref={sectionRef}
@@ -288,8 +377,17 @@ export function CapabilitiesSection() {
               inference, hexagonal platforms, and measured latency wins.
             </p>
           </div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)] md:text-xs">
-            {String(CAPABILITIES.length).padStart(2, "0")} disciplines
+          <p
+            aria-live="polite"
+            className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)] md:text-xs"
+          >
+            <span
+              className="transition-colors duration-500"
+              style={{ color: current.accent }}
+            >
+              {current.index}
+            </span>{" "}
+            / {String(CAPABILITIES.length).padStart(2, "0")} · {current.title}
           </p>
         </div>
 
@@ -304,6 +402,7 @@ export function CapabilitiesSection() {
           >
             {CAPABILITIES.map((cap, index) => {
               const isActive = index === active;
+              const TabIcon = cap.icon;
               return (
                 <button
                   key={cap.index}
@@ -316,19 +415,45 @@ export function CapabilitiesSection() {
                   onFocus={() => selectCapability(index)}
                   onClick={() => selectCapability(index)}
                   className={cn(
-                    "group grid grid-cols-[2.5rem_1fr_auto] items-center gap-3 border-b border-[var(--border)] py-5 text-left transition-colors md:py-6",
+                    "group relative grid grid-cols-[1.75rem_2.25rem_1fr_auto] items-center gap-3 border-b border-[var(--border)] py-5 pl-3 text-left transition-colors md:py-6",
                     isActive
                       ? "border-[var(--text-primary)]"
                       : "hover:border-[var(--text-muted)]",
                   )}
                 >
+                  {/* Active accent bar */}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "absolute top-1/2 left-0 h-[62%] w-[2px] origin-center -translate-y-1/2 transition-transform duration-500 ease-out",
+                      isActive ? "scale-y-100" : "scale-y-0",
+                    )}
+                    style={{ backgroundColor: cap.accent }}
+                  />
+
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "flex size-7 items-center justify-center rounded-full border transition-colors duration-300",
+                      isActive
+                        ? ""
+                        : "border-[var(--border)] text-[var(--text-muted)] group-hover:text-[var(--text-primary)]",
+                    )}
+                    style={
+                      isActive
+                        ? { borderColor: cap.accent, color: cap.accent }
+                        : undefined
+                    }
+                  >
+                    <TabIcon className="size-3.5" />
+                  </span>
+
                   <span
                     className={cn(
-                      "font-mono text-[10px] transition-colors md:text-xs",
-                      isActive
-                        ? "text-[var(--text-primary)]"
-                        : "text-[var(--text-muted)]",
+                      "font-mono text-[10px] tabular-nums transition-colors md:text-xs",
+                      isActive ? "" : "text-[var(--text-muted)]",
                     )}
+                    style={isActive ? { color: cap.accent } : undefined}
                   >
                     {cap.index}
                   </span>
@@ -358,9 +483,10 @@ export function CapabilitiesSection() {
                     className={cn(
                       "size-4 transition duration-300",
                       isActive
-                        ? "translate-x-0 text-[var(--text-primary)] opacity-100"
+                        ? "translate-x-0 opacity-100"
                         : "-translate-x-1 text-[var(--text-muted)] opacity-0 group-hover:opacity-60",
                     )}
+                    style={isActive ? { color: current.accent } : undefined}
                     aria-hidden
                   />
                 </button>
@@ -393,19 +519,64 @@ export function CapabilitiesSection() {
               aria-labelledby={`capability-tab-${current.index}`}
               className="relative z-10 flex h-full flex-col gap-8 p-6 md:p-8"
             >
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
-                  Discipline {current.index}
+              {/* Ghost number behind the panel */}
+              <span
+                data-cap-ghost
+                aria-hidden
+                className="pointer-events-none absolute -top-6 right-3 -z-0 select-none font-display text-[8rem] leading-none font-bold tracking-tighter text-transparent md:text-[12rem]"
+                style={{ WebkitTextStroke: "1px var(--border)" }}
+              >
+                {current.index}
+              </span>
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-3">
+                  <span
+                    data-cap-icon
+                    className="flex size-9 shrink-0 items-center justify-center rounded-full border md:size-10"
+                    style={{
+                      borderColor: current.accent,
+                      color: current.accent,
+                    }}
+                  >
+                    <Icon className="size-4 md:size-[18px]" />
+                  </span>
+                  <span
+                    data-cap-line
+                    className="h-px w-10 origin-left"
+                    style={{ backgroundColor: current.accent }}
+                  />
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                    Discipline {current.index}
+                  </p>
+                </div>
+
+                <div className="mt-3 overflow-hidden py-1">
+                  <h3
+                    data-cap-title-inner
+                    className="font-display text-2xl font-semibold tracking-tighter text-[var(--text-primary)] will-change-transform md:text-3xl"
+                  >
+                    {current.title}
+                  </h3>
+                </div>
+
+                <p
+                  data-cap-fade
+                  className="mt-2 font-serif text-lg italic md:text-xl"
+                  style={{ color: current.accent }}
+                >
+                  {current.signal}
                 </p>
-                <h3 className="mt-3 font-display text-2xl font-semibold tracking-tighter text-[var(--text-primary)] md:text-3xl">
-                  {current.title}
-                </h3>
-                <p className="mt-4 max-w-lg text-sm leading-relaxed text-[var(--text-muted)] text-pretty md:text-base">
+
+                <p
+                  data-cap-fade
+                  className="mt-4 max-w-lg text-sm leading-relaxed text-[var(--text-muted)] text-pretty md:text-base"
+                >
                   {current.detail}
                 </p>
               </div>
 
-              <div>
+              <div className="relative z-10">
                 <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)]">
                   Deliverables
                 </p>
@@ -413,6 +584,7 @@ export function CapabilitiesSection() {
                   {current.deliverables.map((item) => (
                     <Badge
                       key={item}
+                      data-cap-badge
                       variant="outline"
                       className="rounded-full border-[var(--border)] bg-transparent px-3 py-1 font-mono text-xs font-normal text-[var(--text-primary)]"
                     >
@@ -424,16 +596,23 @@ export function CapabilitiesSection() {
 
               <div
                 ref={metricsRef}
-                className="mt-auto grid grid-cols-2 gap-6 border-t border-[var(--border)] pt-6"
+                className="relative z-10 mt-auto grid grid-cols-2 gap-6 border-t border-[var(--border)] pt-6"
               >
                 {current.proof.map((metric) => (
                   <div key={`${current.index}-${metric.label}`}>
-                    <p
-                      data-proof-value
-                      className="font-display text-3xl font-semibold tracking-tighter text-[var(--text-primary)] md:text-4xl"
-                    >
-                      {formatProof(metric.value, metric.suffix)}
-                    </p>
+                    <div className="flex items-baseline gap-2">
+                      <span
+                        aria-hidden
+                        className="h-4 w-[3px] rounded-full"
+                        style={{ backgroundColor: current.accent }}
+                      />
+                      <p
+                        data-proof-value
+                        className="font-display text-3xl font-semibold tracking-tighter text-[var(--text-primary)] md:text-4xl"
+                      >
+                        {formatProof(metric.value, metric.suffix)}
+                      </p>
+                    </div>
                     <p className="mt-1 text-xs text-[var(--text-muted)] md:text-sm">
                       {metric.label}
                     </p>
@@ -441,7 +620,7 @@ export function CapabilitiesSection() {
                 ))}
               </div>
 
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="relative z-10 flex flex-wrap items-center gap-3">
                 <Button asChild size="sm" className="rounded-full">
                   <Link href={current.caseStudy.href}>
                     {current.caseStudy.label}

@@ -19,7 +19,7 @@ export const SITE_META: SiteMeta = {
     "Engineering portfolio — multi-agent systems, clinical AI, and production-grade software.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://surya.dev",
   author: "Surya",
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@surya.dev",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "surya.pratap.aiml@gmail.com",
 };
 
 export const NAV_ITEMS: NavItem[] = [

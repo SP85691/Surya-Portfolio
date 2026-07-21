@@ -13,19 +13,36 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const DISCIPLINES = [
   {
     index: "01",
-    label: "Multi-agent systems",
-    detail: "Orchestration, audit envelopes, and human confirmation loops.",
+    label: "Agentic AI systems",
+    detail:
+      "LangGraph orchestration, tool calling, and human in the loop gates that keep AI defensible.",
   },
   {
     index: "02",
-    label: "Clinical inference",
-    detail: "High-stakes AI with traceability, safeguards, and calm operator UX.",
+    label: "Document intelligence & RAG",
+    detail:
+      "Hybrid retrieval across pgvector and Neo4j over real financial documents at scale.",
   },
   {
     index: "03",
-    label: "Production platforms",
-    detail: "Observable systems built around latency budgets and reliable rollouts.",
+    label: "Production backend",
+    detail:
+      "Dual FastAPI microservices on AWS with Celery and Redis, and an ~85% latency cut.",
   },
+  {
+    index: "04",
+    label: "Leadership & delivery",
+    detail:
+      "Leading a seven person pod from problem framing through demos and deployment.",
+  },
+];
+
+const HERO_STATS = [
+  { value: "2+", label: "Years shipping AI" },
+  { value: "4+", label: "Production systems" },
+  { value: "11+", label: "Agent systems" },
+  { value: "~85%", label: "Latency cut" },
+  { value: "7", label: "Engineers led" },
 ];
 
 const SHUTTER_COUNT = 8;
@@ -194,14 +211,20 @@ export function HeroSection() {
           data-hero-row
           className="flex items-center justify-between border-b border-white/15 pb-4 text-[10px] uppercase tracking-[0.22em] text-neutral-400 md:text-xs"
         >
-          <span>Surya / AI systems engineer</span>
+          <span>Surya Pratap / AI &amp; Deployment Engineer</span>
           <span className="hidden items-center gap-2 sm:flex">
             <span className="size-1.5 rounded-full bg-white" />
             Available for select work
           </span>
         </div>
 
-        <div className="flex flex-1 flex-col justify-center py-10 md:py-14">
+        <div className="flex flex-1 flex-col justify-center py-8 md:py-12">
+          <p
+            data-hero-row
+            className="mb-4 font-mono text-[11px] uppercase tracking-[0.24em] text-neutral-400 md:mb-6 md:text-xs"
+          >
+            AI Engineer · Backend · Full Deployment Engineer
+          </p>
           <h1 className="font-display text-[clamp(3.6rem,10.4vw,10rem)] font-semibold uppercase leading-[0.82] tracking-[-0.075em]">
             <span data-hero-row className="block">
               Engineering
@@ -220,8 +243,10 @@ export function HeroSection() {
           >
             <div className="flex max-w-xl flex-col items-start gap-6">
               <p className="text-base leading-relaxed text-neutral-300 md:text-lg">
-                I turn complex AI into dependable products — from multi-agent
-                orchestration to clinical inference and production platforms.
+                I&apos;m <span className="font-semibold text-white">Surya
+                Pratap</span>. I build production grade AI systems end to end, and
+                I lead the pod that ships them, across FinTech, healthcare, EdTech,
+                and agriculture.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Button
@@ -290,6 +315,22 @@ export function HeroSection() {
               </p>
             </div>
           </div>
+
+          <div
+            data-hero-row
+            className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/15 pt-6 sm:grid-cols-3 lg:grid-cols-5"
+          >
+            {HERO_STATS.map((stat) => (
+              <div key={stat.label} className="flex flex-col gap-1">
+                <span className="font-display text-2xl font-semibold tracking-tighter text-white md:text-3xl">
+                  {stat.value}
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500 md:text-[11px]">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div
@@ -297,7 +338,7 @@ export function HeroSection() {
           className="flex items-end justify-between border-t border-white/15 pt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500"
         >
           <span>Scroll to explore</span>
-          <span>Next.js / AI / Systems</span>
+          <span>FastAPI · LangGraph · AWS · Next.js</span>
         </div>
       </div>
     </section>
