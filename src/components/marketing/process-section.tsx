@@ -5,11 +5,19 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+/**
+ * Gate: called from src/app/page.tsx → <ProcessSection />.
+ * Existing file overwrite. Static STEPS[]; images in /public/assets/images/process/.
+ * User: show titles (Design, Discover…) on image instead of numbers; expand to
+ * Plan → Research/Discover → Design/Architect → Build → Ship → Maintain; richer content.
+ */
 import {
+  ClipboardListIcon,
   CompassIcon,
   DraftingCompassIcon,
   BlocksIcon,
   RocketIcon,
+  ShieldCheckIcon,
   type LucideIcon,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -35,37 +43,59 @@ type ProcessStep = {
   accent: string;
 };
 
+/** Plan → Discover → Design → Build → Ship → Maintain — portfolio-grounded loop. */
 const STEPS: ProcessStep[] = [
   {
     index: "01",
+    title: "Plan",
+    kicker: "Scope before sprint",
+    signal: "Ambiguity becomes a buildable plan.",
+    description:
+      "Turn vague asks into sequenced modules, owners, and success metrics both engineers and stakeholders can defend.",
+    detail:
+      "I sit with the problem — client call, operator pain, regulatory constraint — and break it into buildable modules with clear gates. On Infer360 that meant five product modules (IDR → benchmark → reports → catalogue → access) before a single agent graph was drawn. Direction, sequencing, and quality gates land here so the pod never builds the wrong thing fast.",
+    outcomes: [
+      "Scoped delivery plan",
+      "Module sequence",
+      "Success metrics",
+      "Stakeholder alignment",
+    ],
+    image: "/assets/images/process/plan.jpg",
+    imageAlt: "Planning workspace with documents and sticky notes",
+    credit: "Unsplash / Glenn Carstens-Peters",
+    icon: ClipboardListIcon,
+    accent: "#7BA0BC",
+  },
+  {
+    index: "02",
     title: "Discover",
-    kicker: "Constraints before code",
+    kicker: "Research the real risk",
     signal: "Risks become contracts.",
     description:
-      "Map constraints, stakeholders, and failure modes before a single line ships.",
+      "Map constraints, failure modes, and the people who will live with the system on-call — before architecture hardens.",
     detail:
-      "Clinical SLAs, PHI boundaries, and operator workflows define the system — not the model. I interview the people who will live with the product on-call, then write the risks down as contracts the architecture must satisfy.",
+      "Research is where I pressure-test the plan against reality: data shapes, latency budgets, PHI or audit boundaries, and what a wrong answer costs. I interview the operators who will confirm AI proposals, write failure modes as contracts, and decide where humans must stay in the loop. Grounding starts here — retrieval sources, rubrics, and citeable documents — not after the first demo.",
     outcomes: [
-      "Stakeholder map",
       "Failure-mode register",
-      "SLA & PHI boundaries",
-      "Success metrics",
+      "Constraint map",
+      "HITL gate points",
+      "Source / rubric inventory",
     ],
     image: "/assets/images/process/discover.jpg",
-    imageAlt: "Planning workspace with documents and analysis",
+    imageAlt: "Research desk with analysis documents",
     credit: "Unsplash / Glenn Carstens-Peters",
     icon: CompassIcon,
     accent: "#6E8CA0",
   },
   {
-    index: "02",
+    index: "03",
     title: "Design",
-    kicker: "Contracts first",
+    kicker: "Architect contracts first",
     signal: "Boundaries before build.",
     description:
-      "Architecture that separates agents from adapters — propose / confirm as a first-class surface.",
+      "Hexagonal boundaries, propose/confirm surfaces, and audit envelopes drawn before implementation starts.",
     detail:
-      "Hexagonal boundaries, audit envelopes, and human checkpoints are drawn before implementation. Message schemas, kill-switch points, and latency budgets are part of the design — not afterthoughts bolted on at the end.",
+      "I separate agents from adapters and numbers from prose. Message schemas, kill-switch points, latency budgets, and dual-runtime topology (state graphs vs tool loops) are design artefacts — not afterthoughts. On Infer360 the rule is fixed: AI proposes, humans confirm, guarded Python writes. The LLM never issues SQL.",
     outcomes: [
       "Hexagonal diagram",
       "Propose / confirm loops",
@@ -73,23 +103,23 @@ const STEPS: ProcessStep[] = [
       "Latency budgets",
     ],
     image: "/assets/images/process/design.jpg",
-    imageAlt: "Code editor reflecting system design work",
+    imageAlt: "Code editor reflecting system architecture work",
     credit: "Unsplash / Kevin Ku",
     icon: DraftingCompassIcon,
-    accent: "#A88B6A",
+    accent: "#C6A579",
   },
   {
-    index: "03",
+    index: "04",
     title: "Build",
     kicker: "Vertical slices, measured",
     signal: "Observable by default.",
     description:
-      "Ship thin slices with observability baked in — parallel fan-out, caching, selective routing.",
+      "Thin production slices with traces, queues, and eval in the first cut — not bolted on after the incident.",
     detail:
-      "Each slice lands with dashboards, traces, and a rollback path. Lightweight tasks hit smaller models; complex differentials escalate only when confidence drops. Nothing ships without a way to watch it under load.",
+      "Each slice lands with dashboards, Langfuse / OTel traces, and a rollback path. Heavy AI work rides Celery/Redis; APIs stay sub-100 ms. Lightweight tasks hit smaller models; complex work escalates only when confidence drops. Parallel fan-out, prompt caching, and selective routing are measured under load before they leave staging.",
     outcomes: [
       "Observable slices",
-      "Prompt caching",
+      "Async worker fleets",
       "Model routing",
       "Load evidence",
     ],
@@ -97,27 +127,48 @@ const STEPS: ProcessStep[] = [
     imageAlt: "Server racks representing production infrastructure",
     credit: "Unsplash / Taylor Vick",
     icon: BlocksIcon,
-    accent: "#7C9A7E",
+    accent: "#8FB694",
   },
   {
-    index: "04",
+    index: "05",
     title: "Ship",
     kicker: "Production is the product",
     signal: "The rollout is the deliverable.",
     description:
-      "Rollouts with kill switches, calm operator UIs, and metrics that prove the system.",
+      "Staging demos that survive client scrutiny, kill-switch rollouts, and metrics that prove the system under real traffic.",
     detail:
-      "The rollout is the deliverable — not the demo. Kill switches, latency budgets, and operator overrides turn scary releases into non-events. We measure what agents propose so teams can trust what ships.",
+      "I stand up staging, run live demos, and own the path to production. Kill switches, operator overrides, and proof metrics turn scary releases into non-events. We measure what agents propose — latency, cost, accuracy together — so stakeholders can trust what ships. On Infer360 that meant ~85% latency cut and ~70–80% less manual analyst effort without inventing a single number.",
     outcomes: [
       "Kill-switch rollout",
-      "Operator UX",
+      "Staging & live demos",
       "Proof metrics",
-      "Quiet on-call",
+      "Quiet cutover",
     ],
     image: "/assets/images/process/ship.jpg",
     imageAlt: "Analytics dashboard showing production metrics",
     credit: "Unsplash / Luke Chesser",
     icon: RocketIcon,
+    accent: "#C89CA0",
+  },
+  {
+    index: "06",
+    title: "Maintain",
+    kicker: "Stay with the system",
+    signal: "On-call is part of ownership.",
+    description:
+      "Observe, harden, and iterate — retries, cost governance, and eval loops that keep production calm after the launch.",
+    detail:
+      "Forward deployment does not end at launch. I keep the pod sharp on reviews, retries, job locking, and failure recovery — and I stay hands-on when production complains. Cost caps, prompt versioning, and eval harnesses keep models honest as traffic and vendors change. Quiet on-call is the product of design and discipline, not luck.",
+    outcomes: [
+      "On-call readiness",
+      "Retry & recovery",
+      "Cost / prompt versioning",
+      "Continuous eval",
+    ],
+    image: "/assets/images/process/maintain.jpg",
+    imageAlt: "Monitoring and operations dashboard",
+    credit: "Unsplash / Luke Chesser",
+    icon: ShieldCheckIcon,
     accent: "#B08A8A",
   },
 ];
@@ -150,11 +201,8 @@ export function ProcessSection() {
           if (!context.conditions) return;
           const { isDesktop, reduceMotion } = context.conditions;
 
-          // Mobile: CSS already shows the static stacked list and hides the
-          // pinned scene, so there is nothing to animate here.
           if (!isDesktop) return;
 
-          // Desktop + reduced motion: force the static list in place of the pin.
           if (reduceMotion) {
             scene.style.display = "none";
             if (fallback) fallback.style.display = "block";
@@ -167,32 +215,28 @@ export function ProcessSection() {
           const q = (el: Element, sel: string) =>
             gsap.utils.toArray<HTMLElement>(sel, el);
 
-          const copies = gsap.utils.toArray<HTMLElement>(
-            "[data-p-copy]",
-            pin,
-          );
-          const images = gsap.utils.toArray<HTMLElement>(
-            "[data-p-image]",
-            pin,
-          );
+          const copies = gsap.utils.toArray<HTMLElement>("[data-p-copy]", pin);
+          const images = gsap.utils.toArray<HTMLElement>("[data-p-image]", pin);
           const inners = gsap.utils.toArray<HTMLElement>(
             "[data-p-image-inner]",
             pin,
           );
           const nums = gsap.utils.toArray<HTMLElement>("[data-p-num]", pin);
-          const sweeps = gsap.utils.toArray<HTMLElement>(
-            "[data-p-sweep]",
-            pin,
-          );
+          const sweeps = gsap.utils.toArray<HTMLElement>("[data-p-sweep]", pin);
           const shutters = gsap.utils.toArray<HTMLElement>(
             "[data-p-shutter]",
             pin,
           );
-          const progress = pin.querySelector<HTMLElement>(
-            "[data-p-progress]",
-          );
+          const progress = pin.querySelector<HTMLElement>("[data-p-progress]");
 
-          // Per-copy children, indexed to match STEPS order.
+          if (
+            copies.length !== STEPS.length ||
+            images.length !== STEPS.length ||
+            inners.length !== STEPS.length
+          ) {
+            return;
+          }
+
           const parts = copies.map((c) => ({
             titleInner: c.querySelector<HTMLElement>("[data-p-title-inner]"),
             line: c.querySelector<HTMLElement>("[data-p-line]"),
@@ -202,54 +246,74 @@ export function ProcessSection() {
             badges: q(c, "[data-p-badge]"),
           }));
 
-          const setCopyIn = (i: number) => {
-            const p = parts[i]!;
-            gsap.set(p.titleInner, { yPercent: 0 });
-            gsap.set(p.line, { scaleX: 1, transformOrigin: "left center" });
-            gsap.set(p.icon, { autoAlpha: 1, scale: 1, rotate: 0 });
-            gsap.set(p.ghost, { autoAlpha: 0.07, yPercent: 0, scale: 1 });
-            gsap.set(p.fades, { autoAlpha: 1, y: 0 });
-            gsap.set(p.badges, { autoAlpha: 1, y: 0 });
-          };
-          const setCopyOut = (i: number) => {
-            const p = parts[i]!;
-            gsap.set(p.titleInner, { yPercent: 110 });
-            gsap.set(p.line, { scaleX: 0, transformOrigin: "left center" });
-            gsap.set(p.icon, { autoAlpha: 0, scale: 0.7, rotate: -8 });
-            gsap.set(p.ghost, { autoAlpha: 0, yPercent: 10, scale: 1.15 });
-            gsap.set(p.fades, { autoAlpha: 0, y: 14 });
-            gsap.set(p.badges, { autoAlpha: 0, y: 18 });
+          const showStep = (i: number) => {
+            copies.forEach((copy, idx) => {
+              const on = idx === i;
+              gsap.set(copy, { autoAlpha: on ? 1 : 0, yPercent: on ? 0 : 6 });
+              if (on) {
+                const p = parts[idx]!;
+                gsap.set(p.titleInner, { yPercent: 0 });
+                gsap.set(p.line, { scaleX: 1, transformOrigin: "left center" });
+                gsap.set(p.icon, { autoAlpha: 1, scale: 1, rotate: 0 });
+                gsap.set(p.ghost, { autoAlpha: 0.07, yPercent: 0, scale: 1 });
+                gsap.set(p.fades, { autoAlpha: 1, y: 0 });
+                gsap.set(p.badges, { autoAlpha: 1, y: 0 });
+              }
+            });
+            images.forEach((img, idx) => {
+              gsap.set(img, { autoAlpha: idx === i ? 1 : 0 });
+            });
+            gsap.set(inners, { scale: 1, transformOrigin: "center" });
+            gsap.set(nums, { yPercent: 0 });
+            gsap.set(sweeps, { xPercent: -140, autoAlpha: 0 });
+            gsap.set(shutters, { scaleY: 0, transformOrigin: "top" });
           };
 
-          // Baseline — only the first step is visible.
-          gsap.set(copies, { autoAlpha: 0, yPercent: 6 });
-          gsap.set(copies[0]!, { autoAlpha: 1, yPercent: 0 });
-          gsap.set(images, { autoAlpha: 0 });
-          gsap.set(images[0]!, { autoAlpha: 1 });
-          gsap.set(inners, { scale: 1, transformOrigin: "center" });
-          gsap.set(nums, { yPercent: 0 });
-          gsap.set(sweeps, { xPercent: -140, autoAlpha: 0 });
-          gsap.set(shutters, { scaleY: 0, transformOrigin: "top" });
+          showStep(0);
           if (progress) gsap.set(progress, { scaleX: 1 / STEPS.length });
 
-          STEPS.forEach((_, i) => (i === 0 ? setCopyIn(0) : setCopyOut(i)));
+          // One clean segment per step. Transitions are short crossfades —
+          // no staggered shutters that overlap the next step and get stuck.
+          const DWELL = 1;
+          const XFADE = 0.35;
+          const SEG = DWELL + XFADE;
+          const STEP_COUNT = STEPS.length;
 
-          const STEP = 1; // one segment per step
+          // Shutters unused in this timeline — force hidden so they cannot cover media.
+          gsap.set(shutters, { scaleY: 0, autoAlpha: 0 });
 
           const tl = gsap.timeline({
             defaults: { ease: "none" },
             scrollTrigger: {
+              id: "process-method",
               trigger: pin,
               start: "top top",
-              end: () => "+=" + window.innerHeight * STEPS.length,
+              end: () =>
+                "+=" + Math.round(window.innerHeight * STEP_COUNT * 1.5),
               pin: true,
-              scrub: 0.6,
+              pinSpacing: true,
+              scrub: 0.55,
               anticipatePin: 1,
               invalidateOnRefresh: true,
+              // Higher than projects so pinSpacing is measured before projects start.
+              refreshPriority: 2,
+              // Snap to each stage so Lenis cannot skip Discover → Projects.
+              snap: {
+                snapTo: (value) => {
+                  const i = Math.min(
+                    STEP_COUNT - 1,
+                    Math.max(0, Math.round(value * STEP_COUNT - 0.5)),
+                  );
+                  return (i + 0.5) / STEP_COUNT;
+                },
+                duration: { min: 0.15, max: 0.4 },
+                delay: 0.04,
+                ease: "power1.inOut",
+              },
               onUpdate(self) {
                 const idx = Math.min(
-                  STEPS.length - 1,
-                  Math.max(0, Math.round(self.progress * STEPS.length)),
+                  STEP_COUNT - 1,
+                  Math.floor(self.progress * STEP_COUNT),
                 );
                 setActive((prev) => (prev === idx ? prev : idx));
               },
@@ -257,176 +321,128 @@ export function ProcessSection() {
           });
 
           STEPS.forEach((_, i) => {
-            const at = i * STEP;
+            const at = i * SEG;
             tl.addLabel(`step-${i}`, at);
 
-            // Dwell parallax — the frame is always breathing.
-            tl.to(inners[i]!, { scale: 1.16, duration: STEP }, at);
-            tl.to(nums[i]!, { yPercent: -14, duration: STEP }, at);
+            // Dwell / parallax for this step.
+            tl.to(inners[i]!, { scale: 1.12, duration: DWELL }, at);
+            tl.to(nums[i]!, { yPercent: -10, duration: DWELL }, at);
             if (parts[i]!.ghost) {
-              tl.to(parts[i]!.ghost, { yPercent: -8, duration: STEP }, at);
+              tl.to(parts[i]!.ghost, { yPercent: -6, duration: DWELL }, at);
             }
 
-            if (i < STEPS.length - 1) {
-              const next = i + 1;
-              const wipeIn = at + STEP * 0.6;
-              const cover = wipeIn + STEP * 0.16;
-              const wipeOut = cover + STEP * 0.02;
+            // Pad final step so every stage owns an equal timeline slice.
+            if (i >= STEPS.length - 1) {
+              tl.to({}, { duration: XFADE }, at + DWELL);
+              return;
+            }
 
-              // Current copy exits (container + ghost fade).
-              tl.to(
-                copies[i]!,
-                {
-                  autoAlpha: 0,
-                  yPercent: -6,
-                  duration: STEP * 0.16,
-                  ease: "power2.in",
-                },
-                wipeIn + STEP * 0.02,
-              );
-              if (parts[i]!.ghost) {
-                tl.to(
-                  parts[i]!.ghost,
-                  { autoAlpha: 0, duration: STEP * 0.12 },
-                  wipeIn + STEP * 0.02,
-                );
-              }
+            const next = i + 1;
+            const xAt = at + DWELL;
 
-              // Shutters wipe the panel closed.
-              tl.to(
-                shutters,
-                {
-                  scaleY: 1,
-                  duration: STEP * 0.16,
-                  stagger: { each: 0.02, from: "start" },
-                  ease: "power3.inOut",
-                },
-                wipeIn,
-              );
+            // Crossfade copy
+            tl.to(
+              copies[i]!,
+              { autoAlpha: 0, yPercent: -4, duration: XFADE * 0.55 },
+              xAt,
+            );
+            tl.fromTo(
+              copies[next]!,
+              { autoAlpha: 0, yPercent: 5 },
+              { autoAlpha: 1, yPercent: 0, duration: XFADE },
+              xAt + XFADE * 0.15,
+            );
 
-              // Swap image + reset the next frame under cover.
-              tl.set(images[i]!, { autoAlpha: 0 }, cover)
-                .set(images[next]!, { autoAlpha: 1 }, cover)
-                .set(inners[next]!, { scale: 1 }, cover)
-                .set(nums[next]!, { yPercent: 0 }, cover);
+            // Crossfade image (no shutters)
+            tl.to(images[i]!, { autoAlpha: 0, duration: XFADE * 0.5 }, xAt);
+            tl.fromTo(
+              images[next]!,
+              { autoAlpha: 0 },
+              { autoAlpha: 1, duration: XFADE },
+              xAt + XFADE * 0.1,
+            );
+            tl.set(inners[next]!, { scale: 1 }, xAt);
+            tl.set(nums[next]!, { yPercent: 0 }, xAt);
 
-              // Next copy container rises in.
-              tl.fromTo(
-                copies[next]!,
-                { autoAlpha: 0, yPercent: 6 },
-                {
-                  autoAlpha: 1,
-                  yPercent: 0,
-                  duration: STEP * 0.2,
-                  ease: "power2.out",
-                },
-                cover,
-              );
-
-              // Masked title reveal.
-              tl.fromTo(
-                parts[next]!.titleInner,
-                { yPercent: 110 },
-                { yPercent: 0, duration: STEP * 0.26, ease: "power4.out" },
-                cover,
-              );
-              // Accent underline draws out.
-              tl.fromTo(
-                parts[next]!.line,
-                { scaleX: 0 },
-                { scaleX: 1, duration: STEP * 0.3, ease: "power2.out" },
-                cover + STEP * 0.04,
-              );
-              // Icon pops.
-              tl.fromTo(
-                parts[next]!.icon,
-                { autoAlpha: 0, scale: 0.7, rotate: -8 },
-                {
-                  autoAlpha: 1,
-                  scale: 1,
-                  rotate: 0,
-                  duration: STEP * 0.3,
-                  ease: "back.out(1.6)",
-                },
-                cover + STEP * 0.02,
-              );
-              // Signal + detail cascade.
-              tl.fromTo(
-                parts[next]!.fades,
-                { autoAlpha: 0, y: 14 },
-                {
-                  autoAlpha: 1,
-                  y: 0,
-                  duration: STEP * 0.28,
-                  stagger: STEP * 0.05,
-                  ease: "power2.out",
-                },
-                cover + STEP * 0.05,
-              );
-              // Outcome badges stagger.
-              tl.fromTo(
-                parts[next]!.badges,
-                { autoAlpha: 0, y: 18 },
-                {
-                  autoAlpha: 1,
-                  y: 0,
-                  duration: STEP * 0.3,
-                  stagger: STEP * 0.05,
-                  ease: "power2.out",
-                },
-                cover + STEP * 0.08,
-              );
-              // Ghost number drifts in behind.
+            // Soft reveal for next copy pieces
+            tl.fromTo(
+              parts[next]!.titleInner,
+              { yPercent: 100 },
+              { yPercent: 0, duration: XFADE, ease: "power3.out" },
+              xAt + XFADE * 0.15,
+            );
+            tl.fromTo(
+              parts[next]!.line,
+              { scaleX: 0 },
+              {
+                scaleX: 1,
+                duration: XFADE * 0.8,
+                transformOrigin: "left center",
+                ease: "power2.out",
+              },
+              xAt + XFADE * 0.2,
+            );
+            tl.fromTo(
+              parts[next]!.icon,
+              { autoAlpha: 0, scale: 0.85 },
+              { autoAlpha: 1, scale: 1, duration: XFADE * 0.7, ease: "power2.out" },
+              xAt + XFADE * 0.15,
+            );
+            tl.fromTo(
+              parts[next]!.fades,
+              { autoAlpha: 0, y: 10 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: XFADE * 0.7,
+                stagger: 0.04,
+                ease: "power2.out",
+              },
+              xAt + XFADE * 0.2,
+            );
+            tl.fromTo(
+              parts[next]!.badges,
+              { autoAlpha: 0, y: 10 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: XFADE * 0.7,
+                stagger: 0.03,
+                ease: "power2.out",
+              },
+              xAt + XFADE * 0.25,
+            );
+            if (parts[next]!.ghost) {
               tl.fromTo(
                 parts[next]!.ghost,
-                { autoAlpha: 0, yPercent: 10, scale: 1.15 },
-                {
-                  autoAlpha: 0.07,
-                  yPercent: 0,
-                  scale: 1,
-                  duration: STEP * 0.4,
-                  ease: "power2.out",
-                },
-                cover,
+                { autoAlpha: 0 },
+                { autoAlpha: 0.07, duration: XFADE },
+                xAt + XFADE * 0.15,
               );
+            }
 
-              // Light sweep across the new frame.
+            // Optional light sweep — does not block stage visibility
+            if (sweeps[next]) {
               tl.fromTo(
                 sweeps[next]!,
-                { xPercent: -140, autoAlpha: 0 },
+                { xPercent: -120, autoAlpha: 0 },
                 {
-                  xPercent: 140,
-                  autoAlpha: 1,
-                  duration: STEP * 0.5,
-                  ease: "power2.inOut",
+                  xPercent: 120,
+                  autoAlpha: 0.8,
+                  duration: XFADE,
+                  ease: "power1.inOut",
                 },
-                cover,
-              ).to(
-                sweeps[next]!,
-                { autoAlpha: 0, duration: STEP * 0.12 },
-                cover + STEP * 0.44,
+                xAt,
               );
-
-              // Shutters lift to reveal the frame.
-              tl.to(
-                shutters,
-                {
-                  scaleY: 0,
-                  duration: STEP * 0.2,
-                  stagger: { each: 0.02, from: "end" },
-                  ease: "power3.inOut",
-                },
-                wipeOut,
-              );
+              tl.to(sweeps[next]!, { autoAlpha: 0, duration: 0.08 }, xAt + XFADE);
             }
           });
 
-          // Continuous progress rail across the whole scene.
           if (progress) {
             tl.fromTo(
               progress,
               { scaleX: 1 / STEPS.length },
-              { scaleX: 1, duration: STEPS.length * STEP },
+              { scaleX: 1, duration: STEPS.length * SEG },
               0,
             );
           }
@@ -453,9 +469,9 @@ export function ProcessSection() {
       <div ref={sceneRef} data-process-scene className="hidden md:block">
         <div
           ref={pinRef}
-          className="relative flex min-h-svh flex-col justify-center overflow-hidden border-b border-[var(--border)] pt-24 pb-12 md:pt-28 md:pb-14"
+          className="relative flex min-h-svh flex-col justify-start overflow-hidden border-b border-[var(--border)] pt-20 pb-28 md:pt-24 md:pb-32"
         >
-          <div className="mx-auto flex w-full max-w-[min(100rem,94vw)] flex-col gap-7 px-4 md:gap-9 md:px-6">
+          <div className="mx-auto flex w-full max-w-[min(100rem,94vw)] flex-col gap-5 px-4 md:gap-6 md:px-6">
             <header className="flex flex-col gap-5">
               <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-xl">
@@ -469,8 +485,9 @@ export function ProcessSection() {
                     How I work
                   </h2>
                   <p className="mt-3 max-w-md text-sm leading-relaxed text-pretty text-[var(--text-muted)] md:text-base">
-                    A disciplined loop from discovery to production. Each stage
-                    holds the screen — scroll to walk it, reverse to step back.
+                    Plan → Discover → Design → Build → Ship → Maintain. Each
+                    stage holds the screen — scroll to walk it, reverse to step
+                    back.
                   </p>
                 </div>
                 <p
@@ -506,10 +523,10 @@ export function ProcessSection() {
               </div>
             </header>
 
-            <div className="grid items-stretch gap-8 md:grid-cols-[auto_minmax(0,0.92fr)_minmax(0,1.18fr)] md:gap-10 lg:gap-14">
+            <div className="grid items-start gap-6 md:grid-cols-[auto_minmax(0,0.92fr)_minmax(0,1.18fr)] md:gap-8 lg:gap-12">
               {/* Vertical index rail (desktop) */}
               <div
-                className="hidden md:flex md:flex-col md:items-center md:justify-center md:pr-1"
+                className="hidden md:flex md:flex-col md:items-center md:justify-start md:pt-2 md:pr-1"
                 aria-hidden
               >
                 {STEPS.map((step, index) => (
@@ -533,7 +550,7 @@ export function ProcessSection() {
                       {step.index}
                     </span>
                     {index < STEPS.length - 1 && (
-                      <span className="relative my-2.5 h-12 w-px overflow-hidden bg-[var(--border)]">
+                      <span className="relative my-1.5 h-8 w-px overflow-hidden bg-[var(--border)] lg:my-2 lg:h-10">
                         <span
                           className={cn(
                             "absolute inset-x-0 top-0 origin-top bg-[var(--text-primary)] transition-transform duration-500 ease-out",
@@ -548,7 +565,7 @@ export function ProcessSection() {
               </div>
 
               {/* Copy stack — one active step at a time */}
-              <div className="relative min-h-[17rem] md:min-h-[30rem]">
+              <div className="relative min-h-[15rem] md:min-h-[24rem] lg:min-h-[26rem]">
                 {STEPS.map((step, index) => {
                   const Icon = step.icon;
                   return (
@@ -557,7 +574,7 @@ export function ProcessSection() {
                       data-p-copy
                       aria-hidden={index !== active}
                       className={cn(
-                        "absolute inset-0 flex flex-col justify-center",
+                        "absolute inset-0 flex flex-col justify-start pt-1",
                         index !== active && "pointer-events-none",
                       )}
                     >
@@ -565,13 +582,13 @@ export function ProcessSection() {
                       <span
                         data-p-ghost
                         aria-hidden
-                        className="pointer-events-none absolute -top-10 right-0 -z-0 select-none font-display text-[7rem] leading-none font-bold tracking-tighter text-transparent md:-top-16 md:text-[13rem]"
+                        className="pointer-events-none absolute -top-6 right-0 -z-0 select-none font-display text-[5.5rem] leading-none font-bold tracking-tighter text-transparent md:-top-8 md:text-[9rem]"
                         style={{ WebkitTextStroke: "1px var(--border)" }}
                       >
                         {step.index}
                       </span>
 
-                      <div className="relative z-10 flex flex-col gap-4 md:gap-5">
+                      <div className="relative z-10 flex flex-col gap-3 md:gap-4">
                         <div className="flex items-center gap-3">
                           <span
                             data-p-icon
@@ -593,10 +610,10 @@ export function ProcessSection() {
                           </span>
                         </div>
 
-                        <div className="overflow-hidden py-1">
+                        <div className="overflow-hidden py-0.5">
                           <h3
                             data-p-title-inner
-                            className="font-display text-4xl font-semibold tracking-tighter text-[var(--text-primary)] will-change-transform md:text-5xl lg:text-6xl"
+                            className="font-display text-3xl font-semibold tracking-tighter text-[var(--text-primary)] will-change-transform md:text-4xl lg:text-5xl"
                           >
                             {step.title}
                           </h3>
@@ -636,16 +653,13 @@ export function ProcessSection() {
               </div>
 
               {/* Image panel */}
-              <div className="relative h-[40svh] overflow-hidden border border-[var(--border)] bg-[var(--bg-surface)] md:h-auto md:min-h-[30rem]">
+              <div className="relative h-[36svh] overflow-hidden border border-[var(--border)] bg-[var(--bg-surface)] md:h-auto md:min-h-[24rem] lg:min-h-[26rem]">
                 {STEPS.map((step, index) => (
                   <div
-                    key={step.image}
+                    key={step.index}
                     data-p-image
                     aria-hidden={index !== active}
-                    className={cn(
-                      "absolute inset-0",
-                      index === 0 ? "opacity-100" : "opacity-0",
-                    )}
+                    className="absolute inset-0"
                   >
                     <div
                       data-p-image-inner
@@ -698,9 +712,9 @@ export function ProcessSection() {
                       <div>
                         <p
                           data-p-num
-                          className="font-display text-[clamp(3.5rem,13vw,8rem)] leading-[0.85] font-semibold tracking-tighter text-white/90 will-change-transform"
+                          className="font-display text-[clamp(2.75rem,9vw,5.5rem)] leading-[0.9] font-semibold tracking-tighter text-white/95 will-change-transform"
                         >
-                          {step.index}
+                          {step.title}
                         </p>
                         <p className="mt-3 max-w-sm text-sm text-pretty text-white/75 md:text-base">
                           {step.description}
@@ -817,6 +831,14 @@ export function ProcessSection() {
                       sizes="(min-width: 768px) 55vw, 100vw"
                       className="object-cover grayscale contrast-[1.05] brightness-[0.75]"
                     />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                      <p className="font-display text-2xl font-semibold tracking-tighter text-white">
+                        {step.title}
+                      </p>
+                      <p className="mt-1 text-xs text-white/70">
+                        {step.description}
+                      </p>
+                    </div>
                     <figcaption className="sr-only">{step.credit}</figcaption>
                   </figure>
                 </article>

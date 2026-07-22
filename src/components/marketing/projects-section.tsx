@@ -275,17 +275,24 @@ export function ProjectsSection() {
           const tl = gsap.timeline({
             defaults: { ease: "none" },
             scrollTrigger: {
+              id: "projects-showcase",
               trigger: pin,
               start: "top top",
-              end: () => "+=" + window.innerHeight * PROJECTS.length,
+              end: () => "+=" + Math.round(window.innerHeight * PROJECTS.length),
               pin: true,
-              scrub: 0.6,
+              pinSpacing: true,
+              scrub: 0.7,
               anticipatePin: 1,
               invalidateOnRefresh: true,
+              // Lower than process — process pin spacer must exist first.
+              refreshPriority: 1,
               onUpdate(self) {
                 const idx = Math.min(
                   PROJECTS.length - 1,
-                  Math.max(0, Math.round(self.progress * PROJECTS.length)),
+                  Math.max(
+                    0,
+                    Math.floor(self.progress * PROJECTS.length * 0.999),
+                  ),
                 );
                 setActive((prev) => (prev === idx ? prev : idx));
               },
@@ -465,7 +472,24 @@ export function ProjectsSection() {
         },
       );
 
-      return () => mm.revert();
+      // Refresh once after layout/images settle — never on a short timer mid-scroll.
+      const refresh = () => ScrollTrigger.refresh();
+      let cancelled = false;
+      const onLoad = () => {
+        if (cancelled) return;
+        requestAnimationFrame(refresh);
+      };
+      if (document.readyState === "complete") {
+        onLoad();
+      } else {
+        window.addEventListener("load", onLoad, { once: true });
+      }
+
+      return () => {
+        cancelled = true;
+        window.removeEventListener("load", onLoad);
+        mm.revert();
+      };
     },
     { scope: sectionRef },
   );
@@ -487,7 +511,7 @@ export function ProjectsSection() {
           <div className="absolute inset-0">
             {PROJECTS.map((project, index) => (
               <div
-                key={project.image}
+                key={project.index}
                 data-pr-image
                 aria-hidden={index !== active}
                 className={cn(

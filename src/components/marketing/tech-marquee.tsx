@@ -14,24 +14,84 @@ type StackItem = {
   icon: string;
 };
 
+/**
+ * Caller: `src/app/page.tsx` → `<TechMarquee />` (Trusted stack section).
+ * Existing purpose: this file already owns the marquee; expanding STACK only.
+ * Data: static in-module list — `{ name: string, icon: string }` paths under
+ * `/public/assets/icons/stack/*.svg` (no DB / date fields).
+ * User: gather resume + portfolio skills, add bluffed extras (Azure, Docker,
+ * Redis, etc.), download SVG/PNG assets, ship 30–50+ skills in Trusted stack.
+ */
 const STACK: StackItem[] = [
-  { name: "Next.js", icon: "/assets/icons/stack/nextjs.svg" },
   { name: "Python", icon: "/assets/icons/stack/python.svg" },
   { name: "TypeScript", icon: "/assets/icons/stack/typescript.svg" },
-  { name: "OpenAI", icon: "/assets/icons/stack/openai.svg" },
-  { name: "PostgreSQL", icon: "/assets/icons/stack/postgresql.svg" },
-  { name: "FastAPI", icon: "/assets/icons/stack/fastapi.svg" },
-  { name: "PyTorch", icon: "/assets/icons/stack/pytorch.svg" },
-  { name: "Redis", icon: "/assets/icons/stack/redis.svg" },
-  { name: "AWS", icon: "/assets/icons/stack/aws.svg" },
+  { name: "JavaScript", icon: "/assets/icons/stack/javascript.svg" },
+  { name: "React", icon: "/assets/icons/stack/react.svg" },
+  { name: "Next.js", icon: "/assets/icons/stack/nextjs.svg" },
+  { name: "Vite", icon: "/assets/icons/stack/vite.svg" },
   { name: "Tailwind", icon: "/assets/icons/stack/tailwind.svg" },
-  { name: "LangGraph", icon: "/assets/icons/stack/langgraph.svg" },
+  { name: "Three.js", icon: "/assets/icons/stack/threedotjs.svg" },
   { name: "GSAP", icon: "/assets/icons/stack/gsap.svg" },
+  { name: "FastAPI", icon: "/assets/icons/stack/fastapi.svg" },
+  { name: "Flask", icon: "/assets/icons/stack/flask.svg" },
+  { name: "Celery", icon: "/assets/icons/stack/celery.svg" },
+  { name: "SQLAlchemy", icon: "/assets/icons/stack/sqlalchemy.svg" },
+  { name: "Alembic", icon: "/assets/icons/stack/alembic.svg" },
+  { name: "Redis", icon: "/assets/icons/stack/redis.svg" },
+  { name: "PostgreSQL", icon: "/assets/icons/stack/postgresql.svg" },
+  { name: "pgvector", icon: "/assets/icons/stack/pgvector.svg" },
+  { name: "MongoDB", icon: "/assets/icons/stack/mongodb.svg" },
+  { name: "Neo4j", icon: "/assets/icons/stack/neo4j.svg" },
+  { name: "MySQL", icon: "/assets/icons/stack/mysql.svg" },
+  { name: "TimescaleDB", icon: "/assets/icons/stack/timescaledb.svg" },
+  { name: "Pinecone", icon: "/assets/icons/stack/pinecone.svg" },
+  { name: "ChromaDB", icon: "/assets/icons/stack/chromadb.svg" },
+  { name: "FAISS", icon: "/assets/icons/stack/faiss.svg" },
+  { name: "AstraDB", icon: "/assets/icons/stack/astradb.svg" },
+  { name: "Supabase", icon: "/assets/icons/stack/supabase.svg" },
+  { name: "Firebase", icon: "/assets/icons/stack/firebase.svg" },
+  { name: "AWS", icon: "/assets/icons/stack/aws.svg" },
+  { name: "AWS S3", icon: "/assets/icons/stack/aws-s3.svg" },
+  { name: "AWS RDS", icon: "/assets/icons/stack/aws-rds.svg" },
+  { name: "Azure", icon: "/assets/icons/stack/azure.svg" },
+  { name: "Azure AI Foundry", icon: "/assets/icons/stack/azure-ai-foundry.svg" },
+  { name: "GCP", icon: "/assets/icons/stack/gcp.svg" },
+  { name: "Docker", icon: "/assets/icons/stack/docker.svg" },
+  { name: "Kubernetes", icon: "/assets/icons/stack/kubernetes.svg" },
+  { name: "Git", icon: "/assets/icons/stack/git.svg" },
+  { name: "GitHub", icon: "/assets/icons/stack/github.svg" },
+  { name: "GitHub Actions", icon: "/assets/icons/stack/github-actions.svg" },
+  { name: "LangGraph", icon: "/assets/icons/stack/langgraph.svg" },
+  { name: "LangChain", icon: "/assets/icons/stack/langchain.svg" },
+  { name: "LlamaIndex", icon: "/assets/icons/stack/llamaindex.svg" },
+  { name: "AutoGen", icon: "/assets/icons/stack/autogen.svg" },
+  { name: "OpenAI", icon: "/assets/icons/stack/openai.svg" },
+  { name: "Anthropic", icon: "/assets/icons/stack/anthropic.svg" },
+  { name: "Claude", icon: "/assets/icons/stack/claude.svg" },
+  { name: "Claude Code", icon: "/assets/icons/stack/claude-code.svg" },
+  { name: "Gemini", icon: "/assets/icons/stack/gemini.svg" },
+  { name: "Ollama", icon: "/assets/icons/stack/ollama.svg" },
+  { name: "PyTorch", icon: "/assets/icons/stack/pytorch.svg" },
+  { name: "Hugging Face", icon: "/assets/icons/stack/huggingface.svg" },
+  { name: "Unsloth", icon: "/assets/icons/stack/unsloth.svg" },
+  { name: "Jupyter", icon: "/assets/icons/stack/jupyter.svg" },
+  { name: "Whisper", icon: "/assets/icons/stack/whisper.svg" },
+  { name: "Docling", icon: "/assets/icons/stack/docling.svg" },
+  { name: "PyMuPDF", icon: "/assets/icons/stack/pymupdf.svg" },
+  { name: "RAG", icon: "/assets/icons/stack/rag.svg" },
+  { name: "RAGAS", icon: "/assets/icons/stack/ragas.svg" },
+  { name: "Langfuse", icon: "/assets/icons/stack/langfuse.svg" },
+  { name: "Grafana", icon: "/assets/icons/stack/grafana.svg" },
+  { name: "OpenTelemetry", icon: "/assets/icons/stack/opentelemetry.svg" },
+  { name: "ElevenLabs", icon: "/assets/icons/stack/elevenlabs.svg" },
+  { name: "Groq", icon: "/assets/icons/stack/groq.svg" },
+  { name: "Socket.IO", icon: "/assets/icons/stack/socketio.svg" },
+  { name: "uv", icon: "/assets/icons/stack/uv.svg" },
 ];
 
-/** Full set on both rows, phase-shifted for denser logo cloud */
-const ROW_A = STACK;
-const ROW_B = [...STACK.slice(6), ...STACK.slice(0, 6)];
+const mid = Math.ceil(STACK.length / 2);
+const ROW_A = STACK.slice(0, mid);
+const ROW_B = STACK.slice(mid);
 
 function StackMark({ icon }: { icon: string }) {
   return (
@@ -53,10 +113,11 @@ function StackChip({ name, icon }: StackItem) {
     <Badge
       variant="outline"
       className={cn(
-        "group/chip hover-elevate h-14 shrink-0 gap-3 rounded-2xl border-[var(--border)]",
-        "bg-[var(--bg-surface)] px-3.5 py-2 font-mono text-sm font-medium",
-        "text-[var(--text-primary)] transition-[transform,border-color] duration-300",
-        "hover:-translate-y-0.5 hover:border-[var(--text-muted)]",
+        "group/chip hover-elevate h-12 shrink-0 gap-2.5 rounded-xl border-[var(--border)]",
+        "bg-[var(--bg-surface)] px-3 py-1.5 font-mono text-sm font-medium shadow-sm shadow-black/[0.03]",
+        "text-[var(--text-primary)] transition-[transform,border-color,box-shadow] duration-300",
+        "hover:-translate-y-0.5 hover:border-[var(--text-muted)] hover:shadow-md hover:shadow-black/[0.06]",
+        "dark:shadow-none dark:hover:shadow-none",
       )}
     >
       <span
@@ -86,13 +147,14 @@ function TickerRow({
 
   return (
     <div data-ticker-row className="relative overflow-hidden py-0.5">
+      {/* Theme-safe edge fades — caller page.tsx TechMarquee. User: light mode odd. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[var(--bg-page)] via-[var(--bg-page)]/80 to-transparent sm:w-28"
+        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[var(--bg-page)] via-[var(--bg-page)]/85 to-transparent sm:w-28"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[var(--bg-page)] via-[var(--bg-page)]/80 to-transparent sm:w-28"
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[var(--bg-page)] via-[var(--bg-page)]/85 to-transparent sm:w-28"
       />
       <div
         ref={trackRef}
@@ -199,8 +261,8 @@ export function TechMarquee() {
             },
           );
 
-          const tweenA = createInfiniteTicker(rowA, false, 28);
-          const tweenB = createInfiniteTicker(rowB, true, 34);
+          const tweenA = createInfiniteTicker(rowA, false, 55);
+          const tweenB = createInfiniteTicker(rowB, true, 62);
           const tweens = [tweenA, tweenB];
 
           const pause = () => tweens.forEach((t) => t.pause());
@@ -246,9 +308,14 @@ export function TechMarquee() {
       aria-labelledby="trusted-stack-heading"
       className="relative overflow-hidden border-b border-[var(--border)] bg-[var(--bg-page)] py-8 md:py-10"
     >
+      {/* Clean page field — no muddy washes. Caller: page.tsx. User: light theme looks bad. */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="absolute inset-0 opacity-[0.028] dark:opacity-[0.045] [background-image:repeating-linear-gradient(90deg,transparent_0,transparent_calc(12.5%-1px),var(--text-primary)_calc(12.5%-1px),var(--text-primary)_12.5%)]" />
+      </div>
+
       <div
         data-stack-reveal
-        className="mx-auto mb-6 flex max-w-[min(100rem,94vw)] items-end justify-between gap-6 border-b border-[var(--border)] px-4 pb-5 md:mb-8 md:px-6"
+        className="relative z-10 mx-auto mb-6 flex max-w-[min(100rem,94vw)] items-end justify-between gap-6 border-b border-[var(--border)] px-4 pb-5 md:mb-8 md:px-6"
       >
         <div className="min-w-0">
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)] md:text-xs">
@@ -266,13 +333,13 @@ export function TechMarquee() {
             Tools I ship with when the work has to hold up in production.
           </p>
           <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)] md:text-xs">
-            {STACK.length} systems
+            {STACK.length} tools
           </p>
         </div>
       </div>
 
       <div
-        className="motion-safe:block motion-reduce:hidden"
+        className="relative z-10 motion-safe:block motion-reduce:hidden"
         role="region"
         aria-label="Technology stack scrolling showcase"
       >
@@ -283,7 +350,7 @@ export function TechMarquee() {
       </div>
 
       <ul
-        className="mx-auto hidden max-w-[min(90rem,92vw)] flex-wrap items-center justify-center gap-3 px-4 motion-reduce:flex"
+        className="relative z-10 mx-auto hidden max-w-[min(90rem,92vw)] flex-wrap items-center justify-center gap-3 px-4 motion-reduce:flex"
         aria-label="Technology stack"
       >
         {STACK.map((item) => (

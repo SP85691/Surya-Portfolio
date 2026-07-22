@@ -15,11 +15,21 @@
   --accent: #000000;
   --accent-fg: #ffffff;
 
-  /* Lamp effect — light theme: a bright pool that lightens the warm page so
-     dark text stays readable, plus a soft neutral line and beams. */
-  --lamp-glow: #ffffff;
-  --lamp-line: color-mix(in srgb, var(--text-primary) 45%, transparent);
-  --lamp-beam: color-mix(in srgb, #ffffff 72%, transparent);
+  /* Interactive lamp — light stage needs saturated amber (ivory washes out on #f0efec). */
+  --lamp-core: #f0c56a;
+  --lamp-amber: color-mix(in srgb, #d4a04a 82%, transparent);
+  --lamp-rim: color-mix(in srgb, #c89ca0 55%, #e8b86d 45%);
+  --lamp-filament: #b7791f;
+  --lamp-cord: color-mix(in srgb, #3f3f3f 78%, transparent);
+  --lamp-glow: color-mix(in srgb, #f5c878 88%, #c6a579 12%);
+  --lamp-line: color-mix(in srgb, #c6a579 72%, #1a1a1a 18%);
+  --lamp-beam: color-mix(in srgb, #e8b85c 58%, transparent);
+  --lamp-bulb-glass: color-mix(in srgb, #ffe2a3 70%, #e0a84a 30%);
+  --lamp-bulb-edge: color-mix(in srgb, #c6a579 65%, #1a1a1a 20%);
+  --lamp-glow-opacity: 0.92;
+  --lamp-bloom-opacity: 0.78;
+  --lamp-rim-opacity: 0.5;
+  --lamp-cone-opacity: 0.55;
 
   --background: var(--bg-page);
   --foreground: var(--text-primary);
@@ -51,10 +61,21 @@
   --accent: #ffffff;
   --accent-fg: #000000;
 
-  /* Lamp effect — dark theme: a bright white light source glowing over black. */
-  --lamp-glow: #ffffff;
-  --lamp-line: #ffffff;
-  --lamp-beam: color-mix(in srgb, var(--text-primary) 22%, transparent);
+  /* Interactive lamp — dark stage: ivory core + sand/amber bloom + soft mauve rim. */
+  --lamp-core: color-mix(in srgb, #fff1d6 70%, #c6a579 30%);
+  --lamp-amber: color-mix(in srgb, #c6a579 42%, transparent);
+  --lamp-rim: color-mix(in srgb, #c89ca0 22%, transparent);
+  --lamp-filament: #ffd89a;
+  --lamp-cord: color-mix(in srgb, #a3a3a3 70%, transparent);
+  --lamp-glow: var(--lamp-core);
+  --lamp-line: color-mix(in srgb, #fff1d6 55%, #c6a579 45%);
+  --lamp-beam: color-mix(in srgb, var(--lamp-core) 28%, transparent);
+  --lamp-bulb-glass: color-mix(in srgb, #fff1d6 55%, #c6a579 25%);
+  --lamp-bulb-edge: color-mix(in srgb, #fff1d6 45%, #c6a579 35%);
+  --lamp-glow-opacity: 0.55;
+  --lamp-bloom-opacity: 0.42;
+  --lamp-rim-opacity: 0.28;
+  --lamp-cone-opacity: 0.32;
 
   --background: var(--bg-page);
   --foreground: var(--text-primary);
